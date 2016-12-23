@@ -1,0 +1,170 @@
+<dsx>
+
+
+  <scene root="root" axis_length="3" />
+
+  <views default="p1" >
+
+    <perspective id="default" near="0.1" far="300" angle="25">
+      <from x="15" y="15" z="15" />
+      <to x="0" y="0" z="0" />
+    </perspective>
+
+    <perspective id="p1" near="0.1" far="500" angle="22">
+      <from x="15" y="20" z="35" />
+      <to x="5" y="5" z="5" />
+    </perspective>
+
+    <perspective id="p2" near="0.1" far="1500" angle="40">
+           <from x="25" y="25" z="25" />
+           <to x="0" y="0" z="0" />
+    </perspective>
+
+  </views>
+
+  <illumination doublesided="1" local="1" >
+
+    <ambient r="0.5" g="0.5" b="0.5" a="0.5" />
+    <background r="0.1" g="0.1" b="0.2" a="1" />
+
+  </illumination>
+
+  <textures>
+
+
+
+  </textures>
+
+  <lights>
+
+
+  </lights>
+
+
+  <materials>
+
+    <material id="material1" >
+      <emission r="0.2" g="0.2" b="0.2" a="0.2" />
+      <ambient r="0.7" g="0.7" b="0.7" a="0.7" />
+      <diffuse r="0.7" g="0.7" b="0.7" a="1" />
+      <specular r="1" g="1" b="1" a="1" />
+      <shininess value="0.1" />
+    </material>
+
+  </materials>
+
+
+  <transformations>
+
+    <transformation id="sample">
+      <scale x="1" y="1" z="1" />
+    </transformation>
+
+  </transformations>
+
+
+  <primitives>
+
+    <primitive id="quad">
+      <rectangle x1="0" y1="1" x2="0" y2="1" />
+    </primitive>
+
+    <primitive id="triangle">
+      <triangle x1="-0.5" y1="0" z1="0" x2="0" y2="1" z2="0" x3="0.5" y3="0" z3="0" />
+    </primitive>
+
+    <primitive id="torus">
+      <torus inner="0.3" outer="1" slices="20" loops="10" />
+    </primitive>
+
+    <primitive id="cylinder">
+      <cylinder base="0.5" top="0.5" height="1" slices="50" stacks="20" />
+    </primitive>
+
+    <primitive id="sphere">
+      <sphere radius="1" slices="50" stacks="20" />
+    </primitive>
+
+    <primitive id="vehicle">
+      <vehicle  orderU="2" orderV="2" partsU="9" partsV="9" >
+
+        <controlpoint x="-0.5" y="-1.5" z="1" />
+        <controlpoint x="-1.5" y="0" z="0" />
+        <controlpoint x="-0.5" y="1.5" z="1" />
+        <controlpoint x="0.0" y="-1.5" z="0" />
+        <controlpoint x="0.0" y="0" z="0" />
+        <controlpoint x="0.0" y="1.5" z="0" />
+        <controlpoint x="0.5" y="-1.5" z="1" />
+        <controlpoint x="1.5" y="0" z="0" />
+        <controlpoint x="0.5" y="1.5" z="1" />
+
+      </vehicle>
+    </primitive>
+
+
+    <primitive id = "plane">
+      <plane dimX="3" dimY="3" partsX="10" partsY="7"/>
+    </primitive>
+
+    <primitive id = "patch">
+    <patch orderU="2" orderV="2" partsU="9" partsV="9" >
+            <controlpoint x="0" y="-1.5" z="0.0" />
+            <controlpoint x="-1.5" y="0" z="0" />
+            <controlpoint x="-1.5" y="1.5" z="0" />
+            <controlpoint x="0.0" y="-1.5" z="-3.0" />
+            <controlpoint x="0.0" y="0" z="-3.0" />
+            <controlpoint x="0.0" y="1.5" z="-3.0" />
+            <controlpoint x="0" y="-1.5" z="0.0" />
+            <controlpoint x="1.5" y="0" z="0" />
+            <controlpoint x="1.5" y="1.5" z="0" />
+    </patch>
+  </primitive>
+
+
+  <primitive id="board2">
+  <chessboard du="16" dv="16" textureref="boia" su="4" sv="4">
+            <c1 r="0" g="0" b="0" a="1" />
+            <c2 r="1" g="1" b="1" a="1" />
+            <cs r="1" g="0" b="0" a="1" />
+  </chessboard>
+  </primitive>
+
+
+  </primitives>
+
+  <animations>
+
+    <animation id="anim1" span="1" type="linear">
+      <controlpoint xx="0" yy="0" zz="20" />
+      <controlpoint xx="5" yy="0" zz="20" />
+      </animation>
+
+    <animation id="anim2" span="5" type="circular"
+      centerx="0" centery="0" centerz="0"
+      radius="0" startang="0" rotang="180" />
+
+  </animations>
+
+
+  <components>
+
+    <component id="start">
+      <transformation>
+        <transformationref id="sample"/>
+      </transformation>
+
+      <children>
+
+      </children>
+
+      <materials>
+          <material id="material1" />
+      </materials>
+
+      <texture id="none" />
+
+    </component>
+
+  </components>
+
+</dsx>
