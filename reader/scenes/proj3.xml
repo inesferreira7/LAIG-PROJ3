@@ -21,6 +21,7 @@
 
   <textures>
     <texture id="wood2" file="#" length_s="1.0" length_t="1.0" />
+
   </textures>
 
   <lights>

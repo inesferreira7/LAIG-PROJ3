@@ -1,3 +1,4 @@
+
 function getPrologRequest(requestString, context, onSuccess, onError, port) {
     let requestPort = port || 8081;
     let request = new XMLHttpRequest();
