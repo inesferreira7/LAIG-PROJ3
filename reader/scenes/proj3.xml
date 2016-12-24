@@ -10,16 +10,6 @@
       <to x="0" y="0" z="0" />
     </perspective>
 
-    <perspective id="p1" near="0.1" far="500" angle="22">
-      <from x="15" y="20" z="35" />
-      <to x="5" y="5" z="5" />
-    </perspective>
-
-    <perspective id="p2" near="0.1" far="1500" angle="40">
-           <from x="25" y="25" z="25" />
-           <to x="0" y="0" z="0" />
-    </perspective>
-
   </views>
 
   <illumination doublesided="1" local="1" >
@@ -30,8 +20,6 @@
   </illumination>
 
   <textures>
-
-
 
   </textures>
 
@@ -84,23 +72,6 @@
     <primitive id="sphere">
       <sphere radius="1" slices="50" stacks="20" />
     </primitive>
-
-    <primitive id="vehicle">
-      <vehicle  orderU="2" orderV="2" partsU="9" partsV="9" >
-
-        <controlpoint x="-0.5" y="-1.5" z="1" />
-        <controlpoint x="-1.5" y="0" z="0" />
-        <controlpoint x="-0.5" y="1.5" z="1" />
-        <controlpoint x="0.0" y="-1.5" z="0" />
-        <controlpoint x="0.0" y="0" z="0" />
-        <controlpoint x="0.0" y="1.5" z="0" />
-        <controlpoint x="0.5" y="-1.5" z="1" />
-        <controlpoint x="1.5" y="0" z="0" />
-        <controlpoint x="0.5" y="1.5" z="1" />
-
-      </vehicle>
-    </primitive>
-
 
     <primitive id = "plane">
       <plane dimX="3" dimY="3" partsX="10" partsY="7"/>
