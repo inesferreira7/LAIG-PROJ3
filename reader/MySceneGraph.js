@@ -52,6 +52,30 @@ MySceneGraph.prototype.onXMLReady=function()
 
 	// As the graph loaded ok, signal the scene so that any additional initialization depending on the graph can take place
 	this.scene.onGraphLoaded();
+
+	 getPrologRequest('board', this, this.setBoard, this.prologRequestError);
+};
+
+/**
+ * Function called when there is an error in a Prolog Request.
+ * @param data Data received from the request.
+ */
+MySceneGraph.prototype.prologRequestError = function (data) {
+    console.log('Prolog request error: ');
+    console.log(data);
+}
+
+/**
+ * Function called when the Prolog Request is done correctly.
+ * @param context Context given in the request call.
+ * @param data Data received from the request.
+ */
+MySceneGraph.prototype.setBoard = function (context, data) {
+    context.board = JSON.parse(data.target.response);
+
+    // As the graph loaded ok, signal the scene so that any additional initialization depending on the graph can take place
+    context.scene.onGraphLoaded();
+    context.loadedOk = true;
 };
 
 
@@ -104,7 +128,7 @@ MySceneGraph.prototype.parseGlobalsExample= function(rootElement) {
 			var x2 = prim[0].attributes.getNamedItem("x2").value;
 			var y2 = prim[0].attributes.getNamedItem("y2").value;
 
-			this.primitive[tempPrim[0].children[i].attributes.getNamedItem("id").value] = new MyQuad(this.scene,x1,y1,x2,y2);
+		//	this.primitive[tempPrim[0].children[i].attributes.getNamedItem("id").value] = new MyQuad(this.scene,x1,y1,x2,y2);
 		}
 
 		if(prim[0].tagName == 'triangle' ){
@@ -118,7 +142,7 @@ MySceneGraph.prototype.parseGlobalsExample= function(rootElement) {
 			var ty3 = prim[0].attributes.getNamedItem("y3").value;
 			var tz3 = prim[0].attributes.getNamedItem("z3").value;
 
-			this.primitive[tempPrim[0].children[i].attributes.getNamedItem("id").value] = new Triangle(this.scene,tx1,ty1,tz1,tx2,ty2,tz2,tx3,ty3,tz3);
+			//this.primitive[tempPrim[0].children[i].attributes.getNamedItem("id").value] = new Triangle(this.scene,tx1,ty1,tz1,tx2,ty2,tz2,tx3,ty3,tz3);
 		}
 
 		if(prim[0].tagName == 'cylinder' ){
@@ -128,14 +152,14 @@ MySceneGraph.prototype.parseGlobalsExample= function(rootElement) {
 			var slices = prim[0].attributes.getNamedItem("slices").value;
 			var stacks = prim[0].attributes.getNamedItem("stacks").value;
 
-			this.primitive[tempPrim[0].children[i].attributes.getNamedItem("id").value] = new CreateCylinder(this.scene,base, top, height, slices, stacks);
+		//	this.primitive[tempPrim[0].children[i].attributes.getNamedItem("id").value] = new CreateCylinder(this.scene,base, top, height, slices, stacks);
 		}
 
 		if(prim[0].tagName == 'sphere' ){
 			var radius = prim[0].attributes.getNamedItem("radius").value;
 			var slices = prim[0].attributes.getNamedItem("slices").value;
 			var stacks = prim[0].attributes.getNamedItem("stacks").value;
-			this.primitive[tempPrim[0].children[i].attributes.getNamedItem("id").value] = new MySphere(this.scene,radius,slices,stacks);
+		//	this.primitive[tempPrim[0].children[i].attributes.getNamedItem("id").value] = new MySphere(this.scene,radius,slices,stacks);
 		}
 
 		if(prim[0].tagName == 'torus' ){
@@ -144,7 +168,7 @@ MySceneGraph.prototype.parseGlobalsExample= function(rootElement) {
 			var slices = prim[0].attributes.getNamedItem("slices").value;
 			var loops = prim[0].attributes.getNamedItem("loops").value;
 
-			this.primitive[tempPrim[0].children[i].attributes.getNamedItem("id").value] = new Torus(this.scene, inner, outer, slices, loops);
+		//	this.primitive[tempPrim[0].children[i].attributes.getNamedItem("id").value] = new Torus(this.scene, inner, outer, slices, loops);
 		}
 
 		if(prim[0].tagName == 'plane' ){
@@ -153,7 +177,7 @@ MySceneGraph.prototype.parseGlobalsExample= function(rootElement) {
 			var partsX = prim[0].attributes.getNamedItem("partsX").value;
 			var partsY = prim[0].attributes.getNamedItem("partsY").value;
 
-			this.primitive[tempPrim[0].children[i].attributes.getNamedItem("id").value] = new MyPlane(this.scene, dimX, dimY, partsX, partsY);
+			//this.primitive[tempPrim[0].children[i].attributes.getNamedItem("id").value] = new MyPlane(this.scene, dimX, dimY, partsX, partsY);
 		}
 
 
@@ -183,7 +207,7 @@ MySceneGraph.prototype.parseGlobalsExample= function(rootElement) {
 				controlPoints.push(tempU);
 			}
 
-			this.primitive[tempPrim[0].children[i].attributes.getNamedItem("id").value] = new MyPatch(this.scene, orderU, orderV, partsU, partsV,controlPoints);
+			//this.primitive[tempPrim[0].children[i].attributes.getNamedItem("id").value] = new MyPatch(this.scene, orderU, orderV, partsU, partsV,controlPoints);
 		}
 
 		if(prim[0].tagName == 'chessboard' ){
@@ -192,8 +216,8 @@ MySceneGraph.prototype.parseGlobalsExample= function(rootElement) {
 			var su = this.reader.getFloat(prim[0],'su',true);
 			var sv = this.reader.getFloat(prim[0],'sv',true);
 			texturef = this.reader.getString(prim[0], 'textureref', true);
-			console.log(this.textures);
-			var texture = this.textures[texturef].file;
+
+		//	var texture = this.textures[texturef].file;
 			var color1 = prim[0].children[0];
 			var color2 = prim[0].children[1];
 			var colors = prim[0].children[2];
@@ -202,7 +226,7 @@ MySceneGraph.prototype.parseGlobalsExample= function(rootElement) {
 			var c2 = new Color(this.reader.getFloat(color2, 'r', true),this.reader.getFloat(color2, 'g', true),this.reader.getFloat(color2, 'b', true),this.reader.getFloat(color2, 'a', true));
 			var cs = new Color(this.reader.getFloat(colors, 'r', true),this.reader.getFloat(colors, 'g', true),this.reader.getFloat(colors, 'b', true),this.reader.getFloat(colors, 'a', true));
 
-			this.primitive[tempPrim[0].children[i].attributes.getNamedItem("id").value] = new MyChessboard(this.scene, du, dv, texture, su, sv, c1, c2, cs);
+		//this.primitive[tempPrim[0].children[i].attributes.getNamedItem("id").value] = new MyChessboard(this.scene, du, dv, texture, su, sv, c1, c2, cs);
 		}
 
 		if(prim[0].tagName == 'vehicle' ){
@@ -232,7 +256,7 @@ MySceneGraph.prototype.parseGlobalsExample= function(rootElement) {
 					controlPoints.push(tempU);
 				}
 
-				this.primitive[tempPrim[0].children[i].attributes.getNamedItem("id").value] = new MyVehicle(this.scene, orderU, orderV, partsU, partsV,controlPoints );
+			//	this.primitive[tempPrim[0].children[i].attributes.getNamedItem("id").value] = new MyVehicle(this.scene, orderU, orderV, partsU, partsV,controlPoints );
 
 		}
 	}
