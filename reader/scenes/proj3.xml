@@ -128,7 +128,6 @@
       </transformation>
 
       <children>
-          <primitiveref id="piece"/>
       </children>
 
       <materials>

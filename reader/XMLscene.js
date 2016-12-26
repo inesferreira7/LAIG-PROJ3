@@ -38,6 +38,7 @@ XMLscene.prototype.init = function (application) {
 
   this.axis=new CGFaxis(this);
   this.board = new MyBoard(this);
+  this.queen = new Pawn(this);
 
 };
 
@@ -182,6 +183,7 @@ XMLscene.prototype.display = function () {
   this.setDefaultAppearance();
   this.axis.display();
   this.board.display();
+  this.queen.display();
 
   if (this.graph.loadedOk)
   {
