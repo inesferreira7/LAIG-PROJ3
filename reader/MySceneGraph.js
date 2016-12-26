@@ -48,32 +48,7 @@ MySceneGraph.prototype.onXMLReady=function()
 		return;
 	}
 
-	 getPrologRequest('board', this, this.setBoard, this.prologRequestError);
 };
-
-/**
- * Function called when there is an error in a Prolog Request.
- * @param data Data received from the request.
- */
-MySceneGraph.prototype.prologRequestError = function (data) {
-    console.log('Prolog request error: ');
-    console.log(data);
-}
-
-/**
- * Function called when the Prolog Request is done correctly.
- * @param context Context given in the request call.
- * @param data Data received from the request.
- */
-MySceneGraph.prototype.setBoard = function (context, data) {
-    context.board = JSON.parse(data.target.response);
-
-
-    // As the graph loaded ok, signal the scene so that any additional initialization depending on the graph can take place
-    context.scene.onGraphLoaded();
-    context.loadedOk = true;
-};
-
 
 /*
 * Example of method that parses elements of one block and stores information in a specific data structure
@@ -182,7 +157,7 @@ MySceneGraph.prototype.parseGlobalsExample= function(rootElement) {
 
 
 		if(prim[0].tagName == 'piece'){
-			
+
 		/*	var x1 = prim[0].attributes.getNamedItem("x1").value;
 			var y1 = prim[0].attributes.getNamedItem("y1").value;
 			var z1 = prim[0].attributes.getNamedItem("z1").value;

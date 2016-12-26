@@ -14,7 +14,7 @@ XMLscene.prototype.init = function (application) {
 
   this.initLights();
 
-  this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
+  this.gl.clearColor(0.5, 0.5, 0.5, 1.0);
 
   this.gl.clearDepth(100.0);
   this.gl.enable(this.gl.DEPTH_TEST);
@@ -39,15 +39,17 @@ XMLscene.prototype.init = function (application) {
   this.axis=new CGFaxis(this);
   this.board = new MyBoard(this);
 
+
+
 };
 
 XMLscene.prototype.initLights = function () {
 
   this.setGlobalAmbientLight(0,0,0, 1.0);
-  this.lights[0].setPosition(2, 3, 3, 1);
-  this.lights[0].setAmbient(0, 0, 0, 1);
-  this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
-  this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
+  this.lights[0].setPosition(2, 2, 2, 1);
+  this.lights[0].setAmbient(0.8, 0.8, 0.8, 1);
+  this.lights[0].setDiffuse(1, 1, 1, 1.0);
+  this.lights[0].setSpecular(1, 1, 1, 1.0);
   this.lights[0].setVisible(true);
   this.lights[0].enable();
   this.lights[0].update();
