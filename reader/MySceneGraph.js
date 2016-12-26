@@ -68,6 +68,7 @@ MySceneGraph.prototype.prologRequestError = function (data) {
 MySceneGraph.prototype.setBoard = function (context, data) {
     context.board = JSON.parse(data.target.response);
 
+
     // As the graph loaded ok, signal the scene so that any additional initialization depending on the graph can take place
     context.scene.onGraphLoaded();
     context.loadedOk = true;
@@ -123,7 +124,9 @@ MySceneGraph.prototype.parseGlobalsExample= function(rootElement) {
 			var x2 = prim[0].attributes.getNamedItem("x2").value;
 			var y2 = prim[0].attributes.getNamedItem("y2").value;
 
-		//	this.primitive[tempPrim[0].children[i].attributes.getNamedItem("id").value] = new MyQuad(this.scene,x1,y1,x2,y2);
+
+			//this.primitive[tempPrim[0].children[i].attributes.getNamedItem("id").value] = new MyQuad(this.scene,x1,y1,x2,y2);
+
 		}
 
 		if(prim[0].tagName == 'triangle' ){
@@ -173,6 +176,26 @@ MySceneGraph.prototype.parseGlobalsExample= function(rootElement) {
 			var partsY = prim[0].attributes.getNamedItem("partsY").value;
 
 			//this.primitive[tempPrim[0].children[i].attributes.getNamedItem("id").value] = new MyPlane(this.scene, dimX, dimY, partsX, partsY);
+
+		}
+
+
+
+		if(prim[0].tagName == 'piece'){
+			
+		/*	var x1 = prim[0].attributes.getNamedItem("x1").value;
+			var y1 = prim[0].attributes.getNamedItem("y1").value;
+			var z1 = prim[0].attributes.getNamedItem("z1").value;
+			var x2 = prim[0].attributes.getNamedItem("x2").value;
+			var y2 = prim[0].attributes.getNamedItem("y2").value;
+			var z2 = prim[0].attributes.getNamedItem("z2").value;
+			var x3 = prim[0].attributes.getNamedItem("x3").value;
+			var y3 = prim[0].attributes.getNamedItem("y3").value;
+			var z3 = prim[0].attributes.getNamedItem("z3").value;*/
+
+		//	this.primitive[tempPrim[0].children[i].attriutes.getNamedItem("id").value] = new MyPiece(this.scene,x1,y1,z1,x2,y2,z2,x3,y3,z3);
+				this.primitive[tempPrim[0].children[i].attributes.getNamedItem("id").value] = new MyPiece(this.scene);
+
 		}
 
 
@@ -405,12 +428,8 @@ MySceneGraph.prototype.parseGlobalsExample= function(rootElement) {
 
 			for(var t = 0; t < nodeTransformation[0].children.length; t++){
 				this.getTransformationMatrix(nodeTransformation[0].children[t]);
-
-
 			}
-
 		}
-
 
 		//materiais
 

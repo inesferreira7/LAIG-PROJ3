@@ -21,7 +21,6 @@
 
   <textures>
     <texture id="wood2" file="#" length_s="1.0" length_t="1.0" />
-
   </textures>
 
   <lights>
@@ -49,6 +48,7 @@
       <scale x="1" y="1" z="1" />
     </transformation>
 
+
   </transformations>
 
 
@@ -59,7 +59,7 @@
     </primitive>
 
     <primitive id="triangle">
-      <triangle x1="-0.5" y1="0" z1="0" x2="0" y2="1" z2="0" x3="0.5" y3="0" z3="0" />
+      <triangle x1="-0.5" y1="0" z1="0" x2="0" y2="1" z2="0.5" x3="0.5" y3="0" z3="0" />
     </primitive>
 
     <primitive id="torus">
@@ -101,6 +101,9 @@
   </chessboard>
   </primitive>
 
+  <primitive id = "piece">
+    <piece />
+  </primitive>
 
   </primitives>
 
@@ -114,7 +117,6 @@
     <animation id="anim2" span="5" type="circular"
       centerx="0" centery="0" centerz="0"
       radius="0" startang="0" rotang="180" />
-
   </animations>
 
 
@@ -126,7 +128,7 @@
       </transformation>
 
       <children>
-
+          <primitiveref id="piece"/>
       </children>
 
       <materials>
@@ -137,6 +139,8 @@
 
     </component>
 
+
   </components>
+
 
 </dsx>
