@@ -10,16 +10,6 @@
       <to x="0" y="0" z="0" />
     </perspective>
 
-    <perspective id="p1" near="0.1" far="500" angle="22">
-      <from x="15" y="20" z="35" />
-      <to x="5" y="5" z="5" />
-    </perspective>
-
-    <perspective id="p2" near="0.1" far="1500" angle="40">
-           <from x="25" y="25" z="25" />
-           <to x="0" y="0" z="0" />
-    </perspective>
-
   </views>
 
   <illumination doublesided="1" local="1" >
@@ -30,9 +20,7 @@
   </illumination>
 
   <textures>
-
-
-
+    <texture id="wood2" file="#" length_s="1.0" length_t="1.0" />
   </textures>
 
   <lights>
@@ -60,6 +48,7 @@
       <scale x="1" y="1" z="1" />
     </transformation>
 
+
   </transformations>
 
 
@@ -70,7 +59,7 @@
     </primitive>
 
     <primitive id="triangle">
-      <triangle x1="-0.5" y1="0" z1="0" x2="0" y2="1" z2="0" x3="0.5" y3="0" z3="0" />
+      <triangle x1="-0.5" y1="0" z1="0" x2="0" y2="1" z2="0.5" x3="0.5" y3="0" z3="0" />
     </primitive>
 
     <primitive id="torus">
@@ -84,23 +73,6 @@
     <primitive id="sphere">
       <sphere radius="1" slices="50" stacks="20" />
     </primitive>
-
-    <primitive id="vehicle">
-      <vehicle  orderU="2" orderV="2" partsU="9" partsV="9" >
-
-        <controlpoint x="-0.5" y="-1.5" z="1" />
-        <controlpoint x="-1.5" y="0" z="0" />
-        <controlpoint x="-0.5" y="1.5" z="1" />
-        <controlpoint x="0.0" y="-1.5" z="0" />
-        <controlpoint x="0.0" y="0" z="0" />
-        <controlpoint x="0.0" y="1.5" z="0" />
-        <controlpoint x="0.5" y="-1.5" z="1" />
-        <controlpoint x="1.5" y="0" z="0" />
-        <controlpoint x="0.5" y="1.5" z="1" />
-
-      </vehicle>
-    </primitive>
-
 
     <primitive id = "plane">
       <plane dimX="3" dimY="3" partsX="10" partsY="7"/>
@@ -129,6 +101,9 @@
   </chessboard>
   </primitive>
 
+  <primitive id = "piece">
+    <piece />
+  </primitive>
 
   </primitives>
 
@@ -142,7 +117,6 @@
     <animation id="anim2" span="5" type="circular"
       centerx="0" centery="0" centerz="0"
       radius="0" startang="0" rotang="180" />
-
   </animations>
 
 
@@ -154,7 +128,7 @@
       </transformation>
 
       <children>
-
+          <primitiveref id="piece"/>
       </children>
 
       <materials>
@@ -165,6 +139,8 @@
 
     </component>
 
+
   </components>
+
 
 </dsx>
