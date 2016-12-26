@@ -12,11 +12,9 @@ Board.prototype.getPrologRequest = function(requestString, onSuccess, onError, p
 
     var response = data.target.response;
 
-    if (response != 'Bad Request') {
-      var obj = JSON.parse(response);
-      console.log(obj);
-      board.setBoard(obj);
-    }
+    if(response == 'goodbye')
+    return;
+
 
   };
   request.onerror = onError || function(){console.log("Error waiting for response");};

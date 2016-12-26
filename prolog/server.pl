@@ -1,6 +1,8 @@
 :-use_module(library(sockets)).
 :-use_module(library(lists)).
 :-use_module(library(codesio)).
+:-include('martian/Logic.pl').
+:-include('conversion_json.pl').
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%                                        Server                                                   %%%%
@@ -102,11 +104,7 @@ print_header_line(_).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Require your Prolog Files here
-:-include('martian/main.pl').
-:-include('conversion_json.pl').
 
 
-parse_input(board,Board):-
-	board(GameBoard),
-	matrix_to_json(GameBoard,Board).
+parse_input(board,Board):- initialize_board(Board,Columns,Rows).
 parse_input(quit, goodbye).
