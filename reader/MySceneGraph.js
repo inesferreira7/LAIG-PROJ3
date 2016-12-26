@@ -129,7 +129,9 @@ MySceneGraph.prototype.parseGlobalsExample= function(rootElement) {
 			var x2 = prim[0].attributes.getNamedItem("x2").value;
 			var y2 = prim[0].attributes.getNamedItem("y2").value;
 
+
 			//this.primitive[tempPrim[0].children[i].attributes.getNamedItem("id").value] = new MyQuad(this.scene,x1,y1,x2,y2);
+
 		}
 
 		if(prim[0].tagName == 'triangle' ){
@@ -143,7 +145,7 @@ MySceneGraph.prototype.parseGlobalsExample= function(rootElement) {
 			var ty3 = prim[0].attributes.getNamedItem("y3").value;
 			var tz3 = prim[0].attributes.getNamedItem("z3").value;
 
-			this.primitive[tempPrim[0].children[i].attributes.getNamedItem("id").value] = new Triangle(this.scene,tx1,ty1,tz1,tx2,ty2,tz2,tx3,ty3,tz3);
+			//this.primitive[tempPrim[0].children[i].attributes.getNamedItem("id").value] = new Triangle(this.scene,tx1,ty1,tz1,tx2,ty2,tz2,tx3,ty3,tz3);
 		}
 
 		if(prim[0].tagName == 'cylinder' ){
@@ -179,6 +181,7 @@ MySceneGraph.prototype.parseGlobalsExample= function(rootElement) {
 			var partsY = prim[0].attributes.getNamedItem("partsY").value;
 
 			//this.primitive[tempPrim[0].children[i].attributes.getNamedItem("id").value] = new MyPlane(this.scene, dimX, dimY, partsX, partsY);
+
 		}
 
 
@@ -197,6 +200,7 @@ MySceneGraph.prototype.parseGlobalsExample= function(rootElement) {
 
 		//	this.primitive[tempPrim[0].children[i].attriutes.getNamedItem("id").value] = new MyPiece(this.scene,x1,y1,z1,x2,y2,z2,x3,y3,z3);
 				this.primitive[tempPrim[0].children[i].attributes.getNamedItem("id").value] = new MyPiece(this.scene);
+
 		}
 
 

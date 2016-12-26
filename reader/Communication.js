@@ -1,3 +1,4 @@
+
 function getPrologRequest(requestString, context, onSuccess, onError, port) {
     let requestPort = port || 8081;
     let request = new XMLHttpRequest();
@@ -8,6 +9,7 @@ function getPrologRequest(requestString, context, onSuccess, onError, port) {
     };
 
     request.onerror = onError;
+
 
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
     request.send();
