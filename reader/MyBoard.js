@@ -92,8 +92,7 @@ MyBoard.prototype.initBoardMatrix = function(){
        }
      }
    }
-
-
+   this.scene.popMatrix();
  };
 
 
