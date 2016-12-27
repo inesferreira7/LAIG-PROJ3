@@ -20,6 +20,7 @@ Queen.prototype.constructor=Queen;
 
 Queen.prototype.display = function(){
   this.scene.pushMatrix();
+	this.scene.translate(0,0,-0.5);
   this.scene.scale(1,2,1);
 	this.queenAppearance.apply();
   this.queen.display();

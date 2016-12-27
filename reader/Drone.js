@@ -20,6 +20,7 @@ Queen.prototype.constructor=Drone;
 
 Drone.prototype.display = function(){
   this.scene.pushMatrix();
+	this.scene.translate(0,0,-0.5);
   this.scene.scale(1,1.5,1);
   this.droneAppearance.apply();
   this.drone.display();

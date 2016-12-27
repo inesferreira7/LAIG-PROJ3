@@ -20,6 +20,7 @@ Pawn.prototype.constructor=Pawn;
 
 Pawn.prototype.display = function(){
   this.scene.pushMatrix();
+	this.scene.translate(0,0,-0.5);
   this.scene.scale(1,1,1);
 	this.pawnAppearance.apply();
   this.pawn.display();
