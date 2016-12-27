@@ -38,10 +38,26 @@ XMLscene.prototype.init = function (application) {
 
   this.axis=new CGFaxis(this);
   this.board = new MyBoard(this);
-  this.queen = new Pawn(this);
+
+  this.objects = [];
+
+  this.loadObjects();
+
+  this.setPickEnabled(true);
 
 
 
+};
+
+//Percorrer a matriz para transformar peças em objetos
+XMLscene.prototype.loadObjects = function(){
+  for(var x=0; x<this.board.matrix.length;x++){
+    for(var y=0; y<this.board.matrix[x].length; y++){
+      this.objects.push(this.board.matrix[x][y]);
+      if(this.board.pieces[x][y] != "")
+        this.objects.push(this.board.pieces[x][y]);
+    }
+  }
 };
 
 XMLscene.prototype.initLights = function () {
@@ -54,7 +70,7 @@ XMLscene.prototype.initLights = function () {
   this.lights[0].setVisible(true);
   this.lights[0].enable();
   this.lights[0].update();
-  
+
    this.setGlobalAmbientLight(0,0,0, 1);
   this.lights[1].setPosition(2, 2, 2, 1);
   this.lights[1].setAmbient(0.8, 0.8, 0.8, 1);
@@ -63,7 +79,7 @@ XMLscene.prototype.initLights = function () {
   this.lights[1].setVisible(true);
   this.lights[1].enable();
   this.lights[1].update();
-  
+
    this.setGlobalAmbientLight(0,0,0, 1);
   this.lights[2].setPosition(2, 2, 2, 1);
   this.lights[2].setAmbient(0.8, 0.8, 0.8, 1);
@@ -72,8 +88,8 @@ XMLscene.prototype.initLights = function () {
   this.lights[2].setVisible(true);
   this.lights[2].enable();
   this.lights[2].update();
-  
-  
+
+
 };
 
 XMLscene.prototype.initCameras = function () {
@@ -97,6 +113,24 @@ XMLscene.prototype.setDefaultAppearance = function () {
     this.setSpecular(0.2, 0.4, 0.8, 1.0);
     this.setShininess(10.0);
 };
+
+XMLscene.prototype.logPicking = function ()
+{
+
+	if (this.pickMode == false) {
+		if (this.pickResults != null && this.pickResults.length > 0) {
+			for (var i=0; i< this.pickResults.length; i++) {
+				var obj = this.pickResults[i][0];
+				if (obj)
+				{
+					var customId = this.pickResults[i][1];
+          obj.getId();
+				}
+			}
+			this.pickResults.splice(0,this.pickResults.length);
+		}
+	}
+}
 
 XMLscene.prototype.createGraph = function(initialNode){
 
@@ -188,7 +222,7 @@ XMLscene.prototype.update = function(currTime) {
 
 XMLscene.prototype.display = function () {
 
-
+  this.logPicking();
 
   // Clear image and depth buffer everytime we update the scene
   this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
@@ -205,7 +239,6 @@ XMLscene.prototype.display = function () {
   this.setDefaultAppearance();
   this.axis.display();
   this.board.display();
-  this.queen.display();
 
   if (this.graph.loadedOk)
   {

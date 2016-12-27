@@ -7,6 +7,7 @@ function Drone(scene) {
 	CGFobject.call(this,scene);
 
   this.drone = new MyPiece(this.scene);
+	this.id=null;
 
   this.droneAppearance = new CGFappearance(this.scene);
 	this.droneAppearance.loadTexture("res/green.jpg");
@@ -17,6 +18,14 @@ function Drone(scene) {
 
 Drone.prototype = Object.create(CGFobject.prototype);
 Queen.prototype.constructor=Drone;
+
+Drone.prototype.setId = function(id){
+	this.id=id;
+}
+
+Drone.prototype.getId = function(){
+	console.log("Picked drone with id " + this.id);
+}
 
 Drone.prototype.display = function(){
   this.scene.pushMatrix();

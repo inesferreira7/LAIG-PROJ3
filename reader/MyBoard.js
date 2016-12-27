@@ -55,14 +55,22 @@ MyBoard.prototype.initBoardMatrix = function(){
    this.scene.translate(-4,0,5);
    this.scene.scale(0.6,0.6,0.6);
 
+   var i=0; //necessario para atribuir ids
+
    for(var x=0; x<this.matrix.length; x++){
     for (var y=0; y<4; y++){
       this.scene.pushMatrix();
+            this.scene.registerForPick(i, this.matrix[x][y]);
+            i++;
+            this.matrix[x][y].setId(i-1);
        this.matrix[x][y].display();
        this.scene.popMatrix();
 
        if(this.pieces[x][y] != ""){
          this.scene.pushMatrix();
+              this.scene.registerForPick(i, this.pieces[x][y]);
+              i++;
+              this.pieces[x][y].setId(i-1);
          this.scene.multMatrix(this.matrix[x][y].transfMat);
          this.pieces[x][y].display();
          this.scene.popMatrix();

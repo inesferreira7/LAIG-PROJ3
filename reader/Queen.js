@@ -7,6 +7,7 @@ function Queen(scene) {
 	CGFobject.call(this,scene);
 
   this.queen = new MyPiece(this.scene);
+	this.id=null;
 
 	this.queenAppearance = new CGFappearance(this.scene);
 	this.queenAppearance.loadTexture("res/red.jpg");
@@ -17,6 +18,14 @@ function Queen(scene) {
 
 Queen.prototype = Object.create(CGFobject.prototype);
 Queen.prototype.constructor=Queen;
+
+Queen.prototype.setId = function(id){
+	this.id=id;
+}
+
+Queen.prototype.getId = function(){
+	console.log("Picked queen with id " + this.id);
+}
 
 Queen.prototype.display = function(){
   this.scene.pushMatrix();

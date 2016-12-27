@@ -7,6 +7,7 @@ function Pawn(scene) {
 	CGFobject.call(this,scene);
 
   this.pawn = new MyPiece(this.scene);
+	this.id=null;
 
 	this.pawnAppearance = new CGFappearance(this.scene);
 	this.pawnAppearance.loadTexture("res/blue.jpg");
@@ -17,6 +18,14 @@ function Pawn(scene) {
 
 Pawn.prototype = Object.create(CGFobject.prototype);
 Pawn.prototype.constructor=Pawn;
+
+Pawn.prototype.setId = function(id){
+	this.id=id;
+}
+
+Pawn.prototype.getId = function(){
+	console.log("Picked pawn with id " + this.id);
+}
 
 Pawn.prototype.display = function(){
   this.scene.pushMatrix();

@@ -5,6 +5,7 @@ function MyCell(scene, x, y, object, color) {
   this.cell=object;
   this.x = x;
   this.y = y;
+	this.id=null;
 
   this.transfMat = mat4.create();
   mat4.identity(this.transfMat);
@@ -35,6 +36,14 @@ function MyCell(scene, x, y, object, color) {
 
 MyCell.prototype = Object.create(CGFobject.prototype);
 MyCell.prototype.constructor=MyCell;
+
+MyCell.prototype.setId = function(id){
+	this.id=id;
+}
+
+MyCell.prototype.getId = function(){
+	console.log("Picked cell with id " + this.id);
+}
 
 MyCell.prototype.display = function(){
 
