@@ -86,11 +86,6 @@
       <scale x="10" y="0.6" z="6" />
     </transformation>
 
-    <transformation id="board">
-      <translate x="-2.5" y="0" z="1" />
-      <scale x="0.4" y="0.4" z="0.4"/>
-    </transformation>
-
     <transformation id="leg1">
       <translate x="-4.5" y="-2" z="-2.5" />
       <scale x="0.6" y="3.5" z="0.6" />
@@ -222,7 +217,6 @@
       </transformation>
 
       <children>
-        <componentref id="board"/>
         <componentref id="table"/>
         <componentref id="grass"/>
       </children>
@@ -234,23 +228,6 @@
       <texture id="none" />
 
     </component>
-
-    <component id="board">
-      <transformation>
-        <transformationref id="board"/>
-      </transformation>
-
-      <children>
-        <primitiveref id="board" />
-      </children>
-
-      <materials>
-          <material id="material1" />
-      </materials>
-
-      <texture id="none" />
-
-      </component>
 
       <component id="table">
         <transformation>

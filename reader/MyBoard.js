@@ -67,6 +67,8 @@ MyBoard.prototype.initBoardMatrix = function(){
 
  MyBoard.prototype.display = function(){
    this.scene.pushMatrix();
+   this.scene.translate(-2.5,0,1);
+   this.scene.scale(0.4,0.4,0.4);
 
    var i=0; //necessario para atribuir ids
 

@@ -158,10 +158,6 @@ MySceneGraph.prototype.parseGlobalsExample= function(rootElement) {
 
 		}
 
-		if(prim[0].tagName == 'board'){
-				this.primitive[tempPrim[0].children[i].attributes.getNamedItem("id").value] = new MyBoard(this.scene);
-		}
-
 		if(prim[0].tagName == 'cube'){
 				this.primitive[tempPrim[0].children[i].attributes.getNamedItem("id").value] = new MyUnitCubeQuad(this.scene);
 		}
