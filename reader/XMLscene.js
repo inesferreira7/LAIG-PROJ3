@@ -238,7 +238,7 @@ XMLscene.prototype.display = function () {
 
   this.setDefaultAppearance();
   this.axis.display();
-  this.board.display();
+  //this.board.display();
  // this.board.setPosition(1,3,3);
 
   if (this.graph.loadedOk)

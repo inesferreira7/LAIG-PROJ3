@@ -48,6 +48,10 @@ MySceneGraph.prototype.onXMLReady=function()
 		return;
 	}
 
+	this.loadedOk=true;
+
+	this.scene.onGraphLoaded();
+
 };
 
 /*
@@ -100,7 +104,7 @@ MySceneGraph.prototype.parseGlobalsExample= function(rootElement) {
 			var y2 = prim[0].attributes.getNamedItem("y2").value;
 
 
-			//this.primitive[tempPrim[0].children[i].attributes.getNamedItem("id").value] = new MyQuad(this.scene,x1,y1,x2,y2);
+			this.primitive[tempPrim[0].children[i].attributes.getNamedItem("id").value] = new MyQuad(this.scene,x1,y1,x2,y2);
 
 		}
 
@@ -154,7 +158,13 @@ MySceneGraph.prototype.parseGlobalsExample= function(rootElement) {
 
 		}
 
+		if(prim[0].tagName == 'board'){
+				this.primitive[tempPrim[0].children[i].attributes.getNamedItem("id").value] = new MyBoard(this.scene);
+		}
 
+		if(prim[0].tagName == 'cube'){
+				this.primitive[tempPrim[0].children[i].attributes.getNamedItem("id").value] = new MyUnitCubeQuad(this.scene);
+		}
 
 		if(prim[0].tagName == 'piece'){
 
@@ -409,6 +419,7 @@ MySceneGraph.prototype.parseGlobalsExample= function(rootElement) {
 		//materiais
 
 		var loadMaterials = tempNode.getElementsByTagName('materials');
+		console.log(tempNode);
 		var loadMaterialsList = loadMaterials[0].children;
 
 		if(loadMaterialsList.length -1 > this.maxMaterial  ){

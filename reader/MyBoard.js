@@ -53,8 +53,6 @@ MyBoard.prototype.initBoardMatrix = function(){
 
  MyBoard.prototype.display = function(){
    this.scene.pushMatrix();
-   this.scene.translate(-4,0,5);
-   this.scene.scale(0.6,0.6,0.6);
 
    var i=0; //necessario para atribuir ids
 
@@ -83,7 +81,7 @@ MyBoard.prototype.initBoardMatrix = function(){
  };
 
  MyBoard.prototype.setPosition = function(id, x, y){
-	
+
 	console.log("Im here!!!");
 	for(var k = 0; k<this.pieces.length; k++){
 		for(var w = 0; w<this.pieces[k].length; w++){
@@ -95,12 +93,12 @@ MyBoard.prototype.initBoardMatrix = function(){
 			}
 		}
 	}
-	
+
 		for(var w = 0; w<4; w++){
 			if(w == y){
 				this.pieces[x].push(temp);
 			}
 	}
-	
-	
+
+
 }
