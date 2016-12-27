@@ -1,44 +1,78 @@
-Board.prototype.getPrologRequest = function(requestString, onSuccess, onError, port)
+MyBoard.prototype.getPrologRequest = function(requestString, onSuccess, onError, port)
 {
   var requestPort = port || 8081
   var request = new XMLHttpRequest();
-  var board = this;
 
+  var board = this;
   request.open('GET', 'http://localhost:'+requestPort+'/'+requestString, true);
 
-  request.onload = function(data){
-
+  request.onload = onSuccess || function(data){
     console.log("Request successful. Reply: " + data.target.response);
 
-    var response = data.target.response;
+ 		var response = data.target.response;
 
     if(response == 'goodbye')
     return;
 
+    if(response == 'play')
+      console.log("game is not over, pls continue playing");
 
+    if(response == 'end'){
+      board.showWinner();
+      return;
+    }
+
+      var cmd = requestString.substring(0, 9);
+      console.log(cmd);
+      if(cmd == 'make_play'){
+        if(response == 'invalid'){
+          console.log("Invalid play, pls try another move...");
+        }
+        else if(response != 'Bad Request'){
+          board.make_move(board.scene.objectPicked.x, board.scene.objectPicked.y, board.scene.destination.x, board.scene.destination.y);
+          board.makeRequest('end_game(' + board.boardToList() + ',8,P1,P2)');
+        }
+
+        board.scene.objectPicked = null;
+        board.scene.destination = null;
+      }
   };
-  request.onerror = onError || function(){console.log("Error waiting for response");};
+
+
+
+  request.onerror = onError || function(){console.log("Error waiting for response, please check if SICStus server is running.");};
 
   request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
   request.send();
 }
 
-Board.prototype.makeRequest = function()
+MyBoard.prototype.makeRequest = function(request)
 {
-  // Get Parameter Values
-  var requestString = "cpu1_vs_cpu";
   // Make Request
-  this.getPrologRequest(requestString);
-
-  // Get Parameter Values
-  var requestString = "cpu_vs_cpu2";
-  // Make Request
-  this.getPrologRequest(requestString);
+  this.getPrologRequest(request);
 }
 
-//Handle the Reply
-Board.prototype.handleReply = function(data)
-{
-  this.board=data.target.response;
-  console.log(this.board);
+MyBoard.prototype.boardToList = function(){
+
+  var list = "[";
+
+  for(var x=0; x<this.matrix.length; x++){
+    list += "[";
+    for (var y=0; y<4; y++){
+      if(this.pieces[x][y] != "")
+        list += this.pieces[x][y].type;
+      else
+        list += this.matrix[x][y].type;
+      if(y<3)
+        list += ",";
+    }
+    if(x<this.matrix.length - 1)
+      list += "],";
+    else
+      list += "]";
+  }
+
+  list += "]";
+
+  return list;
 }

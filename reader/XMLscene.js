@@ -2,6 +2,8 @@
 function XMLscene(myInterface) {
   CGFscene.call(this);
   this.myInterface=myInterface;
+
+
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -23,7 +25,7 @@ XMLscene.prototype.init = function (application) {
 
   this.enableTextures(true);
 
-//  this.setPickEnabled(true);
+
 
   this.materials = new Stack(null);
   this.textures = new Stack(null);
@@ -39,11 +41,15 @@ XMLscene.prototype.init = function (application) {
   this.axis=new CGFaxis(this);
   this.board = new MyBoard(this);
 
+
   this.objects = [];
 
   this.loadObjects();
 
   this.setPickEnabled(true);
+
+  this.objectPicked = null;
+  this.destination = null;
 
 
 
@@ -116,7 +122,6 @@ XMLscene.prototype.setDefaultAppearance = function () {
 
 XMLscene.prototype.logPicking = function ()
 {
-
 	if (this.pickMode == false) {
 		if (this.pickResults != null && this.pickResults.length > 0) {
 			for (var i=0; i< this.pickResults.length; i++) {
@@ -124,8 +129,22 @@ XMLscene.prototype.logPicking = function ()
 				if (obj)
 				{
 					var customId = this.pickResults[i][1];
-          obj.getId();
+          if(this.objectPicked != null){
+            this.destination = obj;
+            if(this.board.playing == 'player1')
+              this.points = this.board.p1Points;
+            else
+              this.points = this.board.p2Points;
+
+            this.board.makeRequest('make_play(' + this.board.boardToList() + ',' + this.objectPicked.y + ',' +
+            this.objectPicked.x + ',' + obj.y + ',' + obj.x + ',Nb,' + this.board.playing + ',' + this.points + ',Np)');
+          }
+          else{
+          if(obj.type != "empty");
+            this.objectPicked = obj;
 				}
+        obj.getId();
+      }
 			}
 			this.pickResults.splice(0,this.pickResults.length);
 		}
@@ -186,13 +205,6 @@ XMLscene.prototype.createGraph = function(initialNode){
       // this.elapsedTime = 0;
       // this.startTime = 0;
     }
-    // animation = this.graph.animations[newNode.animation[newNode.animationIndex]];
-
-    // if(animation != null)
-    //  animation.apply(this.elapsedTime, newNode);
-    //
-    //  if(newNode.animationIndex == newNode.animation.length)
-    //   newNode.animationIndex = 0;
 
     if(newNode.primitive != null){
       this.pushMatrix();
@@ -223,6 +235,7 @@ XMLscene.prototype.update = function(currTime) {
 XMLscene.prototype.display = function () {
 
   this.logPicking();
+  this.clearPickRegistration();
 
   // Clear image and depth buffer everytime we update the scene
   this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);

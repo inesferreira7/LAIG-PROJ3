@@ -1,12 +1,26 @@
+/**
+ * MyObject
+ * @param gl {WebGLRenderingContext}
+ * @constructor
+ */
+
 function MyBoard(scene){
   CGFobject.call(this,scene);
+  this.scene = scene;
 
   this.initBoardMatrix();
   this.initPieces();
+
+
+  this.p1 = "player1";
+	this.p1Points = 0;
+  this.p2 = "player2";
+	this.p2Points = 0;
+  this.playing = this.p1;
 };
 
 MyBoard.prototype = Object.create(CGFobject.prototype);
-MyBoard.prototype.constructor=MyBoard;
+MyBoard.prototype.constructor = MyBoard;
 
 MyBoard.prototype.initBoardMatrix = function(){
 
@@ -36,13 +50,13 @@ MyBoard.prototype.initBoardMatrix = function(){
     this.pieces.push([]);
     for(var y=0; y<4; y++){
       if((x==0 && y==0) || (x==0 && y==1) || (x==1 && y==0) || (x==7 && y==2) || (x==7 && y==3) || (x==6 && y==3)){
-        this.pieces[x].push(new Queen(this.scene));
+        this.pieces[x].push(new Queen(this.scene,x,y));
       }
       else if((x==0 && y==2) || (x==1 && y==1) || (x==2 && y==0) || (x==7 && y==1) || (x==6 && y==2) || (x==5 && y==3)){
-        this.pieces[x].push(new Drone(this.scene));
+        this.pieces[x].push(new Drone(this.scene,x,y));
       }
       else if((x==1 && y==2) || (x==2 && y==2) || (x==2 && y==1) || (x==6 && y==1) || (x==5 && y==1) || (x==5 && y==2)){
-        this.pieces[x].push(new Pawn(this.scene));
+        this.pieces[x].push(new Pawn(this.scene,x,y));
       }
       else
         this.pieces[x].push("");
@@ -53,8 +67,6 @@ MyBoard.prototype.initBoardMatrix = function(){
 
  MyBoard.prototype.display = function(){
    this.scene.pushMatrix();
-   this.scene.translate(-4,0,5);
-   this.scene.scale(0.6,0.6,0.6);
 
    var i=0; //necessario para atribuir ids
 
@@ -79,28 +91,36 @@ MyBoard.prototype.initBoardMatrix = function(){
      }
    }
 
-   this.scene.popMatrix();
+
  };
 
- MyBoard.prototype.setPosition = function(id, x, y){
-	
-	console.log("Im here!!!");
-	for(var k = 0; k<this.pieces.length; k++){
-		for(var w = 0; w<this.pieces[k].length; w++){
-		if(this.pieces[k][w].id == id) {
-			var temp = [];
-			temp.push(this.pieces[k]);
-			console.log("temp is here " + temp);
-			this.pieces[k].pop();
-			}
-		}
-	}
-	
-		for(var w = 0; w<4; w++){
-			if(w == y){
-				this.pieces[x].push(temp);
-			}
-	}
-	
-	
-}
+
+MyBoard.prototype.make_move = function(xi,yi,xf,yf){
+        console.log("initial " + xi + " " + yi + " final " + xf + " " + yf );
+
+        this.pieces[xf][yf] = this.pieces[xi][yi];
+	      this.pieces[xi][yi] = "";
+
+	      this.pieces[xf][yf].x = xf;
+	      this.pieces[xf][yf].y = yf;
+
+        if(this.playing == this.p1)
+ 		       this.playing = this.p2;
+       	else
+       		this.playing = this.p1;
+
+ 	        this.scene.myInterface.playing = this.playing;
+
+};
+
+
+MyBoard.prototype.showWinner = function(){
+ 	if(this.p1Points > this.p2Points){
+ 		this.winnerP = this.p1Points;
+ 		this.winner = this.p1;
+ 	} else{
+ 		this.winner = this.p2;
+ 		this.winnerP = this.p2Points;
+ 	}
+ 	console.log("The winner is " + this.winner + " with " + this.winnerP + " points!!");
+ }

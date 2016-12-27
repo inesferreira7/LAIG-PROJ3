@@ -3,7 +3,7 @@
  * @param gl {WebGLRenderingContext}
  * @constructor
  */
-function Drone(scene) {
+function Drone(scene,x,y) {
 	CGFobject.call(this,scene);
 
   this.drone = new MyPiece(this.scene);
@@ -14,6 +14,11 @@ function Drone(scene) {
 	this.droneAppearance.setDiffuse(0,0,0,1);
 	this.droneAppearance.setSpecular(0.5,0.5,0.5,1);
 	this.droneAppearance.setShininess(100);
+
+	this.type = "drone";
+
+	this.x = x;
+	this.y = y;
 };
 
 Drone.prototype = Object.create(CGFobject.prototype);

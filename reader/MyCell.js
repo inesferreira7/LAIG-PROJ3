@@ -32,6 +32,7 @@ function MyCell(scene, x, y, object, color) {
   this.originalTransfMat = mat4.create();
    mat4.identity(this.originalTransfMat);
    mat4.copy(this.originalTransfMat, this.transfMat);
+	 this.type = "empty";
    };
 
 MyCell.prototype = Object.create(CGFobject.prototype);

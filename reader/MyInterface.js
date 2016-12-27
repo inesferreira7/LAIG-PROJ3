@@ -20,6 +20,28 @@ MyInterface.prototype.init = function(application) {
 
 	this.gui = new dat.GUI();
 
+	this.playing = 'player1';
+	this.difficulty = 'Dumb';
+	this.difficulties = [ 'Dumb', 'Smart'];
+	var self = this;
+	this.type = 'P vs P';
+	this.types = ['P vs P', 'P vs CPU', 'CPU vs CPU'];
+	this.gui.autoListen = false;
+
+
+
+/*	this.defaultControls = [];
+
+	this.defaultControls[0] = this.gui.add(this,'startGame').name('Start Game');
+	this.defaultControls[1] = this.gui.add(this, 'playing').name('Playing').listen();
+	this.defaultControls[2] = this.gui.add(this, 'type', this.types).name('Type of game').listen();
+	this.optionsFolder = this.gui.addFolder('Options');
+	this.optionsFolder.open();
+
+	this.defaultControls[3] = this.optionsFolder.add(this, 'difficulty', this.difficulties).name('Difficulty').listen();*/
+
+
+
   this.omni=this.gui.addFolder("Omni lights:");
 	this.omni.open();
 
@@ -51,3 +73,7 @@ MyInterface.prototype.processKeyDown = function(event) {
     };
 
 };
+
+MyInterface.prototype.startGame = function(){
+ 	this.scene.board.makeRequest('init');
+ }

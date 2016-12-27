@@ -3,7 +3,7 @@
  * @param gl {WebGLRenderingContext}
  * @constructor
  */
-function Queen(scene) {
+function Queen(scene,x,y) {
 	CGFobject.call(this,scene);
 
   this.queen = new MyPiece(this.scene);
@@ -14,6 +14,10 @@ function Queen(scene) {
 	this.queenAppearance.setDiffuse(0,0,0,1);
 	this.queenAppearance.setSpecular(0.5,0.5,0.5,1);
 	this.queenAppearance.setShininess(100);
+	this.type = "queen";
+
+	this.x = x;
+	this.y = y;
 };
 
 Queen.prototype = Object.create(CGFobject.prototype);

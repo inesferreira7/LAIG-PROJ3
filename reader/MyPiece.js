@@ -6,15 +6,7 @@
 function MyPiece(scene) {
 	CGFobject.call(this,scene);
 
-    /*this.x1 = x1;
-    this.y1 = y1;
-    this.z1 = z1;
-    this.x2 = x2;
-    this.y2 = y2;
-    this.z2 = z2;
-    this.x3 = x3;
-    this.y3 = y3;
-    this.z3 = z3;*/
+  
 
 
     this.triangle1 = new Triangle(this.scene,-0.5,0,0,0,1,0.5,0.5,0,0);

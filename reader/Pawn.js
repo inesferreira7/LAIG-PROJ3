@@ -3,7 +3,7 @@
  * @param gl {WebGLRenderingContext}
  * @constructor
  */
-function Pawn(scene) {
+function Pawn(scene,x,y) {
 	CGFobject.call(this,scene);
 
   this.pawn = new MyPiece(this.scene);
@@ -14,6 +14,9 @@ function Pawn(scene) {
 	this.pawnAppearance.setDiffuse(0,0,0,1);
 	this.pawnAppearance.setSpecular(0.5,0.5,0.5,1);
 	this.pawnAppearance.setShininess(100);
+	this.type = "pawn";
+	this.x = x;
+	this.y = y;
 };
 
 Pawn.prototype = Object.create(CGFobject.prototype);
