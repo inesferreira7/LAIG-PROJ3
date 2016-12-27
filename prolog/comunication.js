@@ -15,22 +15,23 @@ MyBoard.prototype.getPrologRequest = function(requestString, onSuccess, onError,
     return;
 
     if(response == 'play')
-      console.log("game is not over, pls continue playing");
+      console.log("Game is not over, pls continue playing");
 
-    if(response == 'end'){
-      board.showWinner();
-      return;
-    }
+      if(response == 'endgame'){
+
+       board.showWinner();
+       return;
+     }
 
       var cmd = requestString.substring(0, 9);
-      console.log(cmd);
+
       if(cmd == 'make_play'){
         if(response == 'invalid'){
           console.log("Invalid play, pls try another move...");
         }
         else if(response != 'Bad Request'){
           board.make_move(board.scene.objectPicked.x, board.scene.objectPicked.y, board.scene.destination.x, board.scene.destination.y);
-          board.makeRequest('end_game(' + board.boardToList() + ',8,P1,P2)');
+          board.makeRequest('checkend(' + board.boardToList() + ',8,P1,P2)');
         }
 
         board.scene.objectPicked = null;

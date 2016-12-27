@@ -114,9 +114,10 @@ print_header_line(_).
 
 parse_input(board,Board):- initialize_board(Board,Columns,Rows).
 
-parse_input(end_game(Board,Rows,P1Points,P2Points),Return):-
-	calc_division_points(Board,Rows,P1Points,P2Points),
-	(verify_end_game(P1Points, P2Points,_,_) ->	Return = 'end'; Return = 'play').
+	parse_input(checkend(Board, Rows, Points1, Points2), Response):-
+		calc_divisions_points(Board, Rows, Points1, Points2),
+		(verify_end_game(Points1, Points2,_,_) ->	Response = 'endgame'; Response = 'play').
+
 
 	parse_input(make_play(Board, Xi, Yi, Xf, Yf, Nb, Player, Points, Np), Response):-
 	player_nr(Player, Nr),
