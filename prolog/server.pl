@@ -107,4 +107,33 @@ print_header_line(_).
 
 
 parse_input(board,Board):- initialize_board(Board,Columns,Rows).
+
+parse_input(move_piece(Board,NewBoard,Xi,Yi,Xf,Yf,pawn,Player,NrPoints,NewPoints)):-
+XDif is Xf-Xi,
+    YDif is Yf-Yi,
+    XMod is XDif*XDif,
+    YMod is YDif*YDif,
+    XMod=1,
+    YMod=1,
+    check_post_movement_events(Board, Xf, Yf, Player, NrPoints, NewPoints, pawn, NewPiece),
+    put_on_board(Yi,Xi,empty,Board,Board1),
+    put_on_board(Yf,Xf,NewPiece,Board1,NewBoard).
+	
+parse_input(move_piece(Board,NewBoard,Xi,Yf,Xf,Yf,drone,Player,NrPoints,NewPoints)):-
+	Xf-Xi >= -2,
+    Xf-Xi =< 2,
+    % trace,
+    verify_empty_path(Board, Xi, Yf, Xf, Yf),
+    check_post_movement_events(Board, Xf, Yf, Player, NrPoints, NewPoints, drone, NewPiece),
+    put_on_board(Yf, Xi, empty, Board, Board1),
+    put_on_board(Yf, Xf, NewPiece, Board1, NewBoard).
+	
+parse_input(move_piece(Board,NewBoard,Xi,Yi,Xf,Yf,queen,Player,NrPoints,NewPoints)):-
+	XDif is Xf - Xi,
+    YDif is Yf - Yi,
+    XMod is XDif * XDif,
+    YMod is YDif * YDif,
+    XMod = YMod,
+    move_piece_any_direction(Board,NewBoard,Xi,Yi,Xf,Yf,queen,Player,NrPoints,NewPoints).
+	
 parse_input(quit, goodbye).

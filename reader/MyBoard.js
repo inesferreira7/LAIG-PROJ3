@@ -50,6 +50,7 @@ MyBoard.prototype.initBoardMatrix = function(){
   }
 };
 
+
  MyBoard.prototype.display = function(){
    this.scene.pushMatrix();
    this.scene.translate(-4,0,5);
@@ -80,3 +81,26 @@ MyBoard.prototype.initBoardMatrix = function(){
 
    this.scene.popMatrix();
  };
+
+ MyBoard.prototype.setPosition = function(id, x, y){
+	
+	console.log("Im here!!!");
+	for(var k = 0; k<this.pieces.length; k++){
+		for(var w = 0; w<this.pieces[k].length; w++){
+		if(this.pieces[k][w].id == id) {
+			var temp = [];
+			temp.push(this.pieces[k]);
+			console.log("temp is here " + temp);
+			this.pieces[k].pop();
+			}
+		}
+	}
+	
+		for(var w = 0; w<4; w++){
+			if(w == y){
+				this.pieces[x].push(temp);
+			}
+	}
+	
+	
+}
