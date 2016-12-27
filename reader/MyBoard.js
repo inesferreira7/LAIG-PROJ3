@@ -95,6 +95,7 @@ MyBoard.prototype.initBoardMatrix = function(){
  };
 
 
+
 MyBoard.prototype.make_move = function(xi,yi,xf,yf){
         console.log("initial " + xi + " " + yi + " final " + xf + " " + yf );
 

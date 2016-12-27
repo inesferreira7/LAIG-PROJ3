@@ -6,7 +6,7 @@
   <views default="p1" >
 
     <perspective id="default" near="0.1" far="300" angle="25">
-      <from x="15" y="15" z="15" />
+      <from x="7" y="7" z="7" />
       <to x="0" y="0" z="0" />
     </perspective>
 
@@ -15,23 +15,24 @@
   <illumination doublesided="1" local="1" >
 
     <ambient r="0.5" g="0.5" b="0.5" a="0.5" />
-    <background r="0.5" g="0.5" b="0.5" a="1" />
+    <background r="0.3" g="0.8" b="0.8" a="1" />
 
   </illumination>
 
   <textures>
-    <texture id="wood2" file="#" length_s="1.0" length_t="1.0" />
+    <texture id="wood" file="./res/wood.jpg" length_s="1.0" length_t="1.0" />
+    <texture id="grass" file="./res/relva.jpg" length_s="1.0" length_t="1.0" />
   </textures>
 
   <lights>
-  
+
   <omni id="omni1" enabled="1">
       <location x="20" y="30" z="20" w="1" />
       <ambient r="0" g="0" b="0" a="1" />
       <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
       <specular r="1.0" g="1.0" b="1.0" a="1.0" />
     </omni>
-	
+
 	 <spot id="spot1" enabled="1" angle="40" exponent="0.5">
       <target x="10" y="20" z="10" />
       <location x="4" y="2" z="2" />
@@ -48,8 +49,8 @@
       <diffuse r="0.5" g="0.5" b="0.5" a="0.5" />
       <specular r="0.5" g="0.5" b="0.5" a="0.5" />
     </spot>
-	
-	
+
+
 	 <spot id="spot3" enabled="1" angle="40" exponent="0.5">
       <target x="30" y="20" z="0" />
       <location x="4" y="2" z="2" />
@@ -57,7 +58,7 @@
       <diffuse r="0.5" g="0.5" b="0.5" a="0.5" />
       <specular r="0.5" g="0.5" b="0.5" a="0.5" />
     </spot>
-	
+
   </lights>
 
 
@@ -80,6 +81,42 @@
       <scale x="1" y="1" z="1" />
     </transformation>
 
+    <transformation id="tampo">
+      <translate x="0" y="-0.3" z="0"/>
+      <scale x="10" y="0.6" z="6" />
+    </transformation>
+
+    <transformation id="board">
+      <translate x="-2.5" y="0" z="1" />
+      <scale x="0.4" y="0.4" z="0.4"/>
+    </transformation>
+
+    <transformation id="leg1">
+      <translate x="-4.5" y="-2" z="-2.5" />
+      <scale x="0.6" y="3.5" z="0.6" />
+    </transformation>
+
+    <transformation id="leg2">
+      <translate x="-4.5" y="-2" z="2.5" />
+      <scale x="0.6" y="3.5" z="0.6" />
+    </transformation>
+
+    <transformation id="leg3">
+      <translate x="4.5" y="-2" z="-2.5" />
+      <scale x="0.6" y="3.5" z="0.6" />
+    </transformation>
+
+    <transformation id="leg4">
+      <translate x="4.5" y="-2" z="2.5" />
+      <scale x="0.6" y="3.5" z="0.6" />
+    </transformation>
+
+    <transformation id="grass">
+      <translate x="0" y="-3.5" z="0" />
+      <rotate axis="x" angle="-90" />
+      <scale x="15" y="15" z="3" />
+    </transformation>
+
 
   </transformations>
 
@@ -88,6 +125,10 @@
 
     <primitive id="quad">
       <rectangle x1="0" y1="1" x2="0" y2="1" />
+    </primitive>
+
+    <primitive id="cube">
+      <cube />
     </primitive>
 
     <primitive id="triangle">
@@ -133,8 +174,12 @@
   </chessboard>
   </primitive>
 
-  <primitive id = "piece">
+  <primitive id="piece">
     <piece />
+  </primitive>
+
+  <primitive id="board">
+    <board />
   </primitive>
 
   </primitives>
@@ -160,6 +205,7 @@
       </transformation>
 
       <children>
+        <componentref id="scene"/>
       </children>
 
       <materials>
@@ -170,6 +216,164 @@
 
     </component>
 
+    <component id="scene">
+      <transformation>
+        <transformationref id="sample"/>
+      </transformation>
+
+      <children>
+        <componentref id="board"/>
+        <componentref id="table"/>
+        <componentref id="grass"/>
+      </children>
+
+      <materials>
+          <material id="material1" />
+      </materials>
+
+      <texture id="none" />
+
+    </component>
+
+    <component id="board">
+      <transformation>
+        <transformationref id="board"/>
+      </transformation>
+
+      <children>
+        <primitiveref id="board" />
+      </children>
+
+      <materials>
+          <material id="material1" />
+      </materials>
+
+      <texture id="none" />
+
+      </component>
+
+      <component id="table">
+        <transformation>
+          <transformationref id="sample"/>
+        </transformation>
+
+        <children>
+          <componentref id="tampo" />
+          <componentref id="leg1" />
+          <componentref id="leg2" />
+          <componentref id="leg3" />
+          <componentref id="leg4" />
+        </children>
+
+        <materials>
+            <material id="material1" />
+        </materials>
+
+        <texture id="none" />
+
+        </component>
+
+        <component id="tampo">
+          <transformation>
+            <transformationref id="tampo"/>
+          </transformation>
+
+          <children>
+            <primitiveref id="cube" />
+          </children>
+
+          <materials>
+              <material id="material1" />
+          </materials>
+
+          <texture id="wood" />
+
+          </component>
+
+          <component id="leg1">
+            <transformation>
+              <transformationref id="leg1"/>
+            </transformation>
+
+            <children>
+              <primitiveref id="cube"/>
+            </children>
+
+            <materials>
+                <material id="wood" />
+            </materials>
+
+            <texture id="none" />
+
+          </component>
+
+          <component id="leg2">
+            <transformation>
+              <transformationref id="leg2"/>
+            </transformation>
+
+            <children>
+              <primitiveref id="cube"/>
+            </children>
+
+            <materials>
+                <material id="wood" />
+            </materials>
+
+            <texture id="none" />
+
+          </component>
+
+          <component id="leg3">
+            <transformation>
+              <transformationref id="leg3"/>
+            </transformation>
+
+            <children>
+              <primitiveref id="cube"/>
+            </children>
+
+            <materials>
+                <material id="wood" />
+            </materials>
+
+            <texture id="none" />
+
+          </component>
+
+          <component id="leg4">
+            <transformation>
+              <transformationref id="leg4"/>
+            </transformation>
+
+            <children>
+              <primitiveref id="cube"/>
+            </children>
+
+            <materials>
+                <material id="wood" />
+            </materials>
+
+            <texture id="none" />
+
+          </component>
+
+          <component id="grass">
+            <transformation>
+              <transformationref id="grass"/>
+            </transformation>
+
+            <children>
+              <primitiveref id="quad"/>
+            </children>
+
+            <materials>
+                <material id="none" />
+            </materials>
+
+            <texture id="grass" />
+
+          </component>
 
   </components>
 
