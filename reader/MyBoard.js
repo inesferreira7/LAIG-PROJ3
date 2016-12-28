@@ -20,6 +20,7 @@ function MyBoard(scene){
 
 
 
+
 };
 
 MyBoard.prototype = Object.create(CGFobject.prototype);
@@ -100,9 +101,22 @@ MyBoard.prototype.initBoardMatrix = function(){
    this.scene.popMatrix();
  };
 
-
+ MyBoard.prototype.update = function(currTime){
+	for(var x=0; x<this.matrix.length; x++){
+		for (var y=0; y<4; y++){
+			if(this.pieces[x][y] != "")
+				if(this.pieces[x][y].animation != null){
+					this.pieces[x][y].animation.update(currTime);
+				}
+		}
+	}
+};
 
 MyBoard.prototype.make_move = function(xi,yi,xf,yf){
+
+  this.pieces[xi][yi].animation = new MyPieceAnimation(this.pieces[xi][yi], xi, yi, xf, yf, 2);
+  this.pieces[xi][yi].moving = true;
+
         console.log("initial " + xi + " " + yi + " final " + xf + " " + yf );
 
         this.pieces[xf][yf] = this.pieces[xi][yi];

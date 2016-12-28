@@ -6,7 +6,7 @@
 function MyPiece(scene) {
 	CGFobject.call(this,scene);
 
-  
+
 
 
     this.triangle1 = new Triangle(this.scene,-0.5,0,0,0,1,0.5,0.5,0,0);
