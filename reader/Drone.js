@@ -25,6 +25,9 @@ function Drone(scene,x,y) {
 	this.x = x;
 	this.y = y;
 	this.selected = false;
+
+	this.animation = null;
+  this.moving = false;
 };
 
 Drone.prototype = Object.create(CGFobject.prototype);
@@ -38,10 +41,16 @@ Drone.prototype.getId = function(){
 	console.log("Picked drone with id " + this.id + " selected: " + this.selected);
 }
 
+
 Drone.prototype.display = function(){
   this.scene.pushMatrix();
 	this.scene.translate(0,0,-0.5);
   this.scene.scale(1,1.5,1);
+
+if(this.animation != null && this.moving){
+  this.animation.apply();
+
+}
 	if(this.selected ){
 		this.selectedPiece.apply();
 	}

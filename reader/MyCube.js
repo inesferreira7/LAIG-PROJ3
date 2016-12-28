@@ -16,7 +16,7 @@ function Cube(scene, width, height, depth) {
  this.height = height;
  this.depth = depth;
 
- this.square = new MyQuad(this.scene, -0.5, 0.5, 0.5, -0.5);
+ this.square = new MyQuad(this.scene, -1, 1, 1, -1);
 
  this.createInitialMatrixes();
 

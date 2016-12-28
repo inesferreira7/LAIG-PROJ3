@@ -24,6 +24,9 @@ function Pawn(scene,x,y) {
 	this.x = x;
 	this.y = y;
 	this.selected = false;
+
+	this.animation = null;
+  this.moving = false;
 };
 
 Pawn.prototype = Object.create(CGFobject.prototype);
@@ -41,6 +44,12 @@ Pawn.prototype.display = function(){
   this.scene.pushMatrix();
 	this.scene.translate(0,0,-0.5);
   this.scene.scale(1,1,1);
+
+	if(this.animation != null && this.moving){
+	  this.animation.apply();
+
+	}
+	
 	if(this.selected ){
 		this.selectedPiece.apply();
 	}
