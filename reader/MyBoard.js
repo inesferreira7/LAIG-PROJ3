@@ -18,6 +18,8 @@ function MyBoard(scene){
 	this.p2Points = 0;
   this.playing = this.p1;
 
+  //NOT SMOOTH CAMERA ANIMATION 
+  //this.scene.changeCamera('Player2');
 
 
 
