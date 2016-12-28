@@ -17,6 +17,9 @@ function MyBoard(scene){
   this.p2 = "player2";
 	this.p2Points = 0;
   this.playing = this.p1;
+
+
+
 };
 
 MyBoard.prototype = Object.create(CGFobject.prototype);
@@ -78,11 +81,13 @@ MyBoard.prototype.initBoardMatrix = function(){
             this.scene.registerForPick(i, this.matrix[x][y]);
             i++;
             this.matrix[x][y].setId(i-1);
+
        this.matrix[x][y].display();
        this.scene.popMatrix();
 
        if(this.pieces[x][y] != ""){
          this.scene.pushMatrix();
+
               this.scene.registerForPick(i, this.pieces[x][y]);
               i++;
               this.pieces[x][y].setId(i-1);

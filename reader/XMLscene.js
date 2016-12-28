@@ -143,6 +143,18 @@ XMLscene.prototype.logPicking = function ()
           if(obj.type != "empty");
             this.objectPicked = obj;
 				}
+        for(var x = 0; x< 8; x++){
+          for(var y = 0; y < 4 ; y++){
+            if(obj.x == x && obj.y == y){
+              console.log("peça selecionada");
+                this.board.pieces[x][y].selected = true;
+            }
+            else {
+              this.board.pieces[x][y].selected = false;
+            }
+          }
+        }
+
         obj.getId();
       }
 			}

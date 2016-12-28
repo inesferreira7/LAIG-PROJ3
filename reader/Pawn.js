@@ -14,9 +14,16 @@ function Pawn(scene,x,y) {
 	this.pawnAppearance.setDiffuse(0,0,0,1);
 	this.pawnAppearance.setSpecular(0.5,0.5,0.5,1);
 	this.pawnAppearance.setShininess(100);
+
+	this.selectedPiece = new CGFappearance(this.scene);
+  this.selectedPiece.setDiffuse(0.8,0.8,0,1);
+  this.selectedPiece.setSpecular(0.8,0.8,0,1);
+  this.selectedPiece.setAmbient(0.8,0.8,0,1);
+
 	this.type = "pawn";
 	this.x = x;
 	this.y = y;
+	this.selected = false;
 };
 
 Pawn.prototype = Object.create(CGFobject.prototype);
@@ -34,7 +41,11 @@ Pawn.prototype.display = function(){
   this.scene.pushMatrix();
 	this.scene.translate(0,0,-0.5);
   this.scene.scale(1,1,1);
-	this.pawnAppearance.apply();
+	if(this.selected ){
+		this.selectedPiece.apply();
+	}
+	else
+		this.pawnAppearance.apply();
   this.pawn.display();
   this.scene.popMatrix();
 };
