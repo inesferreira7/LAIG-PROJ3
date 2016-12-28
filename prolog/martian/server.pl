@@ -112,7 +112,7 @@ print_header_line(_).
 % Require your Prolog Files here
 
 
-parse_input(board,Board):- initialize_board(Board,Columns,Rows).
+parse_input(init, Board):- initialize_board(Board, Columns, Rows).
 
 	parse_input(checkend(Board, Rows, Points1, Points2), Response):-
 		calc_divisions_points(Board, Rows, Points1, Points2),
@@ -144,37 +144,12 @@ parse_input(make_play(Board, Xi, Yi, Xf, Yf, Nb, Player, Points, Np), Response):
 	Yi > 3,
 	(move(Board, Xi, Yi, Xf, Yf, Nb, Player, Points, Np) -> Response = Np; Response = 'invalid').
 
+	parse_input(bot_play(Board, CPU, Points, Level), Response):-
+		cpu_coordinates(Board,CPU,Xi,Yi,Xf,Yf,Level),
+		move(Board,Xi,Yi,Xf,Yf,NewBoard, CPU, Points, NewPoints),
+		append([Xi], [Yi], Initial),
+		append([Xf], [Yf], Final),
+		append(Final, [NewPoints], Final1),
+		append(Initial, Final1, Response).
 
-/*
-parse_input(move_piece(Board,NewBoard,Xi,Yi,Xf,Yf,pawn,player0,NrPoints,NewPoints),Response):-
-XDif is Xf-Xi,
-    YDif is Yf-Yi,
-    XMod is XDif*XDif,
-    YMod is YDif*YDif,
-    XMod=1,
-    YMod=1,
-    check_post_movement_events(Board, Xf, Yf, player0, NrPoints, NewPoints, pawn, NewPiece),
-    put_on_board(Yi,Xi,empty,Board,Board1),
-    put_on_board(Yf,Xf,NewPiece,Board1,NewBoard),
-		Response = 'move'.
-
-parse_input(move_piece(Board,NewBoard,Xi,Yf,Xf,Yf,drone,player0,NrPoints,NewPoints),Response):-
-	Xf-Xi >= -2,
-    Xf-Xi =< 2,
-    % trace,
-    verify_empty_path(Board, Xi, Yf, Xf, Yf),
-    check_post_movement_events(Board, Xf, Yf, player0, NrPoints, NewPoints, drone, NewPiece),
-    put_on_board(Yf, Xi, empty, Board, Board1),
-    put_on_board(Yf, Xf, NewPiece, Board1, NewBoard),
-		Response = 'move'.
-
-parse_input(move_piece(Board,NewBoard,Xi,Yi,Xf,Yf,queen,player0,NrPoints,NewPoints),Response):-
-	XDif is Xf - Xi,
-    YDif is Yf - Yi,
-    XMod is XDif * XDif,
-    YMod is YDif * YDif,
-    XMod = YMod,
-    move_piece_any_direction(Board,NewBoard,Xi,Yi,Xf,Yf,queen,player0,NrPoints,NewPoints),
-		Response = 'move'.
-*/
 parse_input(quit, goodbye).

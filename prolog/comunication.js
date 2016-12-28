@@ -18,12 +18,31 @@ MyBoard.prototype.getPrologRequest = function(requestString, onSuccess, onError,
       console.log("Game is not over, pls continue playing");
 
       if(response == 'endgame'){
-
        board.showWinner();
        return;
      }
 
       var cmd = requestString.substring(0, 9);
+      console.log("cmg " + cmd);
+      var bot = requestString.substring(0,3);
+      console.log("bot " + bot);
+      if(bot == 'bot'){
+
+       if(response != 'Bad Request'){
+         board.get_bot_move(response);
+         board.makeRequest('checkend(' + board.boardToList() + ',8,P1,P2)');
+         if(board.history.type == 3){
+             setTimeout(function(){
+               var points;
+               if(board.history.playing == board.history.player1)
+                 points = board.history.p1Points;
+               else
+                 points = board.history.p2Points;
+               board.makeRequest('bot_play(' + board.boardToList() + ',' + board.history.playing + ',' + points + ',' + board.history.difficulty + ')');
+             }, 1200);
+       }
+     }
+     }
 
       if(cmd == 'make_play'){
         if(response == 'invalid'){
@@ -33,7 +52,19 @@ MyBoard.prototype.getPrologRequest = function(requestString, onSuccess, onError,
 
           board.make_move(board.scene.objectPicked.x, board.scene.objectPicked.y, board.scene.destination.x, board.scene.destination.y,board.history.playing,parseFloat(response));
           board.makeRequest('checkend(' + board.boardToList() + ',8,P1,P2)');
-        }
+
+          if(board.history.type == 2){
+             setTimeout(function(){
+               var points;
+               if(board.history.playing == board.history.player1)
+                 points = board.history.p1Points;
+               else
+                 points = board.history.p2Points;
+               board.makeRequest('bot_play(' + board.boardToList() + ',' + board.history.playing + ',' + points + ',' + board.history.difficulty + ')');
+             }, 1200);
+           }
+         }
+
 
         board.scene.objectPicked = null;
         board.scene.destination = null;

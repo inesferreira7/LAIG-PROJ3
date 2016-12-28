@@ -11,14 +11,10 @@ function MyBoard(scene){
   this.initBoardMatrix();
   this.initPieces();
 
-  this.history = new MyHistory(this.scene);
+  this.history = null;
 
 
-  this.p1 = "player1";
-	this.p1Points = 0;
-  this.p2 = "player2";
-	this.p2Points = 0;
-  this.playing = this.p1;
+
 
   //NOT SMOOTH CAMERA ANIMATION
   //this.scene.changeCamera('Player2');
@@ -119,10 +115,11 @@ MyBoard.prototype.initBoardMatrix = function(){
 
 MyBoard.prototype.make_move = function(xi,yi,xf,yf,playing,points){
 
-  this.pieces[xi][yi].animation = new MyPieceAnimation(this.pieces[xi][yi], xi, yi, xf, yf, 2);
+  this.pieces[xi][yi].animation = new MyPieceAnimation(this.pieces[xi][yi], xi, yi, xf, yf, 0.5);
   this.pieces[xi][yi].moving = true;
 
         console.log("initial " + xi + " " + yi + " final " + xf + " " + yf );
+        this.history.insertMove(new MyMove(this.scene, xi, yi, xf, yf, this.pieces[xi][yi], this.pieces[xf][yf], playing, points));
 
         this.pieces[xf][yf] = this.pieces[xi][yi];
 	      this.pieces[xi][yi] = "";
@@ -130,10 +127,24 @@ MyBoard.prototype.make_move = function(xi,yi,xf,yf,playing,points){
 	      this.pieces[xf][yf].x = xf;
 	      this.pieces[xf][yf].y = yf;
 
-        this.history.insertMove(xi,yi,xf,yf,playing,points);
 
-};
 
+}
+
+MyBoard.prototype.get_bot_move = function(msg){
+
+ var yi = parseFloat(msg.substring(1,2));
+ var xi = parseFloat(msg.substring(3,4));
+ var yf = parseFloat(msg.substring(5,6));
+ var xf = parseFloat(msg.substring(7,8));
+ if(msg.length == 11)
+ var np = parseFloat(msg.substring(9,10));
+ else {
+   var np = parseFloat(msg.substring(9,11));
+ }
+
+ this.make_move(xi, yi, xf, yf, this.history.playing, np);
+}
 
 MyBoard.prototype.showWinner = function(){
  	if(this.history.p1Points > this.history.p2Points){

@@ -47,7 +47,7 @@ XMLscene.prototype.init = function (application) {
 
   this.loadObjects();
 
-  this.setPickEnabled(true);
+  //this.setPickEnabled(true);
 
   this.objectPicked = null;
   this.destination = null;
@@ -156,7 +156,7 @@ XMLscene.prototype.logPicking = function ()
 					var customId = this.pickResults[i][1];
           if(this.objectPicked != null){
             this.destination = obj;
-            if(this.board.history.playing == 'player1')
+            if(this.board.history.playing == this.board.history.player1)
               this.points = this.board.history.p1Points;
             else
               this.points = this.board.history.p2Points;
@@ -383,7 +383,7 @@ XMLscene.prototype.display = function () {
   this.applyViewMatrix();
 
   this.setDefaultAppearance();
-  this.axis.display();
+  //this.axis.display();
   this.board.display();
  // this.board.setPosition(1,3,3);
 
