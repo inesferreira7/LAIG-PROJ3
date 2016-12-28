@@ -129,7 +129,7 @@ MySceneGraph.prototype.parseGlobalsExample= function(rootElement) {
 			var slices = prim[0].attributes.getNamedItem("slices").value;
 			var stacks = prim[0].attributes.getNamedItem("stacks").value;
 
-		//	this.primitive[tempPrim[0].children[i].attributes.getNamedItem("id").value] = new CreateCylinder(this.scene,base, top, height, slices, stacks);
+			this.primitive[tempPrim[0].children[i].attributes.getNamedItem("id").value] = new CreateCylinder(this.scene,base, top, height, slices, stacks);
 		}
 
 		if(prim[0].tagName == 'sphere' ){
