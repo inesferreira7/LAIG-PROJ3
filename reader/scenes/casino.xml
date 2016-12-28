@@ -1,0 +1,393 @@
+<dsx>
+
+
+  <scene root="root" axis_length="3" />
+
+  <views default="p1" >
+
+    <perspective id="default" near="0.1" far="300" angle="25">
+      <from x="12" y="12" z="12" />
+      <to x="0" y="0" z="0" />
+    </perspective>
+
+  </views>
+
+  <illumination doublesided="1" local="1" >
+
+    <ambient r="0.5" g="0.5" b="0.5" a="0.5" />
+    <background r="0.5" g="0.5" b="0.5" a="1" />
+
+  </illumination>
+
+  <textures>
+    <texture id="wood" file="./res/wood.jpg" length_s="1.0" length_t="1.0" />
+    <texture id="towel" file="./res/casino_towel.jpg" length_s="1.0" length_t="1.0" />
+    <texture id="metal" file="./res/dark_metal.jpg" length_s="1.0" length_t="1.0" />
+    <texture id="carpet" file="./res/carpet.jpg" length_s="1.0" length_t="1.0" />
+    <texture id="casino_wall" file="./res/wall.jpg" length_s="1.0" length_t="1.0" />
+    <texture id="floor" file="./res/floor.jpg" length_s="1.0" length_t="1.0" />
+  </textures>
+
+  <lights>
+
+  <omni id="omni1" enabled="1">
+      <location x="20" y="30" z="20" w="1" />
+      <ambient r="0" g="0" b="0" a="1" />
+      <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+      <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+    </omni>
+
+	 <spot id="spot1" enabled="1" angle="40" exponent="0.5">
+      <target x="10" y="20" z="10" />
+      <location x="4" y="2" z="2" />
+      <ambient r="0.5" g="0.5" b="0.5" a="0.5" />
+      <diffuse r="0.5" g="0.5" b="0.5" a="0.5" />
+      <specular r="0.5" g="0.5" b="0.5" a="0.5" />
+    </spot>
+
+
+	 <spot id="spot2" enabled="1" angle="40" exponent="0.5">
+      <target x="0" y="20" z="30" />
+      <location x="4" y="2" z="2" />
+      <ambient r="0.5" g="0.5" b="0.5" a="0.5" />
+      <diffuse r="0.5" g="0.5" b="0.5" a="0.5" />
+      <specular r="0.5" g="0.5" b="0.5" a="0.5" />
+    </spot>
+
+
+	 <spot id="spot3" enabled="1" angle="40" exponent="0.5">
+      <target x="30" y="20" z="0" />
+      <location x="4" y="2" z="2" />
+      <ambient r="0.5" g="0.5" b="0.5" a="0.5" />
+      <diffuse r="0.5" g="0.5" b="0.5" a="0.5" />
+      <specular r="0.5" g="0.5" b="0.5" a="0.5" />
+    </spot>
+
+  </lights>
+
+
+  <materials>
+
+    <material id="material1" >
+      <emission r="0.2" g="0.2" b="0.2" a="0.2" />
+      <ambient r="0.7" g="0.7" b="0.7" a="0.7" />
+      <diffuse r="0.7" g="0.7" b="0.7" a="1" />
+      <specular r="1" g="1" b="1" a="1" />
+      <shininess value="0.1" />
+    </material>
+
+  </materials>
+
+
+  <transformations>
+
+    <transformation id="sample">
+      <scale x="1" y="1" z="1" />
+    </transformation>
+
+    <transformation id="tampo">
+      <rotate axis="x" angle="-90" />
+      <translate x="0" y="0" z="-0.51" />
+      <scale x="12" y="9" z="0.5" />
+    </transformation>
+
+    <transformation id="towel">
+      <rotate axis="x" angle="-90" />
+      <translate x="0" y="0" z="-0.5" />
+      <scale x="11.5" y="8.5" z="0.5" />
+    </transformation>
+
+    <transformation id="support">
+      <rotate axis="x" angle="-90" />
+      <translate x="0" y="0" z="-4" />
+      <scale x="1.5" y="1.5" z="4" />
+    </transformation>
+
+    <transformation id="carpet">
+      <translate x="0" y="-4" z="0" />
+      <scale x="15" y="0.1" z="15" />
+    </transformation>
+
+    <transformation id="leftwall">
+      <rotate axis="y" angle="90"/>
+      <translate x="4" y="0" z="-15"/>
+      <scale x="18" y="15" z="1" />
+    </transformation>
+
+    <transformation id="rightwall">
+      <rotate axis="z" angle="90"/>
+      <translate x="0" y="7" z="-13"/>
+      <scale x="15" y="18" z="1" />
+    </transformation>
+
+    <transformation id="floor">
+      <rotate axis="x" angle="-90"/>
+      <translate x="-3" y="0" z="-4" />
+      <scale x="25" y="25" z="1" />
+    </transformation>
+
+  </transformations>
+
+
+  <primitives>
+
+    <primitive id="quad">
+      <rectangle x1="0" y1="1" x2="0" y2="1" />
+    </primitive>
+
+    <primitive id="cube">
+      <cube />
+    </primitive>
+
+    <primitive id="triangle">
+      <triangle x1="-0.5" y1="0" z1="0" x2="0" y2="1" z2="0.5" x3="0.5" y3="0" z3="0" />
+    </primitive>
+
+    <primitive id="torus">
+      <torus inner="0.3" outer="1" slices="20" loops="10" />
+    </primitive>
+
+    <primitive id="cylinder">
+      <cylinder base="0.5" top="0.5" height="1" slices="50" stacks="20" />
+    </primitive>
+
+    <primitive id="sphere">
+      <sphere radius="1" slices="50" stacks="20" />
+    </primitive>
+
+    <primitive id = "plane">
+      <plane dimX="3" dimY="3" partsX="10" partsY="7"/>
+    </primitive>
+
+    <primitive id = "patch">
+    <patch orderU="2" orderV="2" partsU="9" partsV="9" >
+            <controlpoint x="0" y="-1.5" z="0.0" />
+            <controlpoint x="-1.5" y="0" z="0" />
+            <controlpoint x="-1.5" y="1.5" z="0" />
+            <controlpoint x="0.0" y="-1.5" z="-3.0" />
+            <controlpoint x="0.0" y="0" z="-3.0" />
+            <controlpoint x="0.0" y="1.5" z="-3.0" />
+            <controlpoint x="0" y="-1.5" z="0.0" />
+            <controlpoint x="1.5" y="0" z="0" />
+            <controlpoint x="1.5" y="1.5" z="0" />
+    </patch>
+  </primitive>
+
+
+  <primitive id="board2">
+  <chessboard du="16" dv="16" textureref="boia" su="4" sv="4">
+            <c1 r="0" g="0" b="0" a="1" />
+            <c2 r="1" g="1" b="1" a="1" />
+            <cs r="1" g="0" b="0" a="1" />
+  </chessboard>
+  </primitive>
+
+  <primitive id="piece">
+    <piece />
+  </primitive>
+
+  <primitive id="board">
+    <board />
+  </primitive>
+
+  </primitives>
+
+  <animations>
+
+    <animation id="anim1" span="1" type="linear">
+      <controlpoint xx="0" yy="0" zz="20" />
+      <controlpoint xx="5" yy="0" zz="20" />
+      </animation>
+
+    <animation id="anim2" span="5" type="circular"
+      centerx="0" centery="0" centerz="0"
+      radius="0" startang="0" rotang="180" />
+  </animations>
+
+
+  <components>
+
+    <component id="start">
+      <transformation>
+        <transformationref id="sample"/>
+      </transformation>
+
+      <children>
+        <componentref id="scene"/>
+      </children>
+
+      <materials>
+          <material id="material1" />
+      </materials>
+
+      <texture id="none" />
+
+    </component>
+
+    <component id="scene">
+      <transformation>
+        <transformationref id="sample"/>
+      </transformation>
+
+      <children>
+        <componentref id="table"/>
+        <componentref id="carpet"/>
+        <componentref id="floor"/>
+        <componentref id="leftwall"/>
+        <componentref id="rightwall"/>
+      </children>
+
+      <materials>
+          <material id="material1" />
+      </materials>
+
+      <texture id="none" />
+
+    </component>
+
+      <component id="table">
+        <transformation>
+          <transformationref id="sample"/>
+        </transformation>
+
+        <children>
+          <componentref id="tampo" />
+          <componentref id="towel" />
+          <componentref id="support" />
+        </children>
+
+        <materials>
+            <material id="material1" />
+        </materials>
+
+        <texture id="none" />
+
+        </component>
+
+        <component id="tampo">
+          <transformation>
+            <transformationref id="tampo"/>
+          </transformation>
+
+          <children>
+            <primitiveref id="cylinder" />
+          </children>
+
+          <materials>
+              <material id="material1" />
+          </materials>
+
+          <texture id="metal" />
+
+          </component>
+
+          <component id="towel">
+            <transformation>
+              <transformationref id="towel"/>
+            </transformation>
+
+            <children>
+              <primitiveref id="cylinder" />
+            </children>
+
+            <materials>
+                <material id="material1" />
+            </materials>
+
+            <texture id="towel" />
+
+            </component>
+
+            <component id="support">
+              <transformation>
+                <transformationref id="support"/>
+              </transformation>
+
+              <children>
+                <primitiveref id="cylinder" />
+              </children>
+
+              <materials>
+                  <material id="material1" />
+              </materials>
+
+              <texture id="metal" />
+
+              </component>
+
+              <component id="carpet">
+                <transformation>
+                  <transformationref id="carpet"/>
+                </transformation>
+
+                <children>
+                  <primitiveref id="cube" />
+                </children>
+
+                <materials>
+                    <material id="material1" />
+                </materials>
+
+                <texture id="carpet" />
+
+                </component>
+
+                <component id="leftwall">
+                  <transformation>
+                    <transformationref id="leftwall"/>
+                  </transformation>
+
+                  <children>
+                    <primitiveref id="quad" />
+                  </children>
+
+                  <materials>
+                      <material id="material1" />
+                  </materials>
+
+                  <texture id="casino_wall" />
+
+                  </component>
+
+                  <component id="rightwall">
+                    <transformation>
+                      <transformationref id="rightwall"/>
+                    </transformation>
+
+                    <children>
+                      <primitiveref id="quad" />
+                    </children>
+
+                    <materials>
+                        <material id="material1" />
+                    </materials>
+
+                    <texture id="casino_wall" />
+
+                    </component>
+
+                    <component id="floor">
+                      <transformation>
+                        <transformationref id="floor"/>
+                      </transformation>
+
+                      <children>
+                        <primitiveref id="quad" />
+                      </children>
+
+                      <materials>
+                          <material id="material1" />
+                      </materials>
+
+                      <texture id="floor" />
+
+                      </component>
+
+
+
+
+
+  </components>
+
+
+</dsx>
