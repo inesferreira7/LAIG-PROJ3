@@ -114,16 +114,16 @@ XMLscene.prototype.initLights = function () {
 
 XMLscene.prototype.initCameras = function () {
   this.perspectives = [];
-  
+
   this.perspectives[0] = new Perspective('Default', vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
   this.perspectives[1] = new Perspective('Player1', vec3.fromValues(15, 8, 0), vec3.fromValues(0, 0, 0));
   this.perspectives[2] = new Perspective('Player2', vec3.fromValues(-15, 8, 0), vec3.fromValues(0, 0, 0));
-  
-  
+
+
   this.camera = new CGFcamera(0.4, 0.1, 500, this.perspectives[0].position, this.perspectives[0].direction);
-  
+
   this.cameraAnimation = null;
-  
+
 };
 
 // Handler called when the graph is finally loaded.
@@ -262,69 +262,69 @@ XMLscene.prototype.createGraph = function(initialNode){
 
 
 XMLscene.prototype.update = function(currTime) {
-	
+
    if (this.startTime == 0)		this.startTime = currTime;
-   
+
    else{
-	   
+
 	   if(this.cameraAnimation != null){
 		   this.elapsedTime = currTime - this.startTime;
 		   this.moveCamera();
 	   }
-	   
+
    }
 };
 
 XMLscene.prototype.changeCamera = function(perspective) {
-	
+
 	var temp = null;
-	
+
 	for(var i = 0; i < this.perspectives.length; i++) {
-		
+
 		if(perspective == this.perspectives[i].name)		temp = this.perspectives[i];
-		
+
 	}
-	
+
 	this.cameraAnimation = new MyCameraAnimation(this.camera, temp);
-	
+
 }
 
 XMLscene.prototype.moveCamera = function() {
-	
+
 	var camera = this.camera;
 	var anime = this.cameraAnimation;
-	
-	if (this.startTime != 0) 
-		
+
+	if (this.startTime != 0)
+
 		if (Math.abs(anime.travelledPositionDist[0]) < Math.abs(anime.positionDist[0]) ||
 			Math.abs(anime.travelledPositionDist[1]) < Math.abs(anime.positionDist[1]) ||
 			Math.abs(anime.travelledPositionDist[2]) < Math.abs(anime.positionDist[2]) ||
-			
+
 			Math.abs(anime.travelledDirectionDist[0]) < Math.abs(anime.directionDist[0]) ||
 			Math.abs(anime.travelledDirectionDist[1]) < Math.abs(anime.directionDist[1]) ||
 			Math.abs(anime.travelledDirectionDist[2]) < Math.abs(anime.directionDist[2]) ) {
 
-			
+
 			var distPosX = anime.positionVelocity[0] * this.elapsedTime;
 			var distPosY = anime.positionVelocity[1] * this.elapsedTime;
 			var distPosZ = anime.positionVelocity[2] * this.elapsedTime;
 
 			if(Math.abs(anime.travelledPositionDist[0]) < Math.abs(anime.positionDist[0])) {
-				
+
 				camera.position[0] += distPosX;
 				anime.travelledPositionDist[0] += distPosX;
 
 			}
 
 			if(Math.abs(anime.travelledPositionDist[1]) < Math.abs(anime.positionDist[1])) {
-				
+
 				camera.position[1] += distPosY;
 				anime.travelledPositionDist[1] += distPosY;
 
 			}
-			
+
 			if(Math.abs(anime.travelledPositionDist[2]) < Math.abs(anime.positionDist[2])) {
-				
+
 				camera.position[2] += distPosZ;
 				anime.travelledPositionDist[2] += distPosZ;
 
@@ -334,8 +334,8 @@ XMLscene.prototype.moveCamera = function() {
 			var distDirY = anime.directionVelocity[1] * this.elapsedTime;
 			var distDirZ = anime.directionVelocity[2] * this.elapsedTime;
 
-			if(Math.abs(anime.travelledDirectionDist[0]) < Math.abs(anime.directionDist[0])) { 
-				
+			if(Math.abs(anime.travelledDirectionDist[0]) < Math.abs(anime.directionDist[0])) {
+
 				camera.target[0] += distDirX;
 				camera.direction[0] += distDirX;
 				anime.travelledDirectionDist[0] += distDirX;
@@ -343,7 +343,7 @@ XMLscene.prototype.moveCamera = function() {
 			}
 
 			if(Math.abs(anime.travelledDirectionDist[1]) < Math.abs(anime.directionDist[1])) {
-				
+
 				camera.target[1] += distDirY;
 				camera.direction[1] += distDirY;
 				anime.travelledDirectionDist[1] += distDirY;
@@ -351,13 +351,13 @@ XMLscene.prototype.moveCamera = function() {
 			}
 
 			if(Math.abs(anime.travelledDirectionDist[2]) < Math.abs(anime.directionDist[2])) {
-				
+
 				camera.target[2] += distDirZ;
 				camera.direction[2] += distDirZ;
 				anime.travelledDirectionDist[2] += distDirZ;
 
 			}
-		
+
 		} else {
 
 			vec3.copy(camera.position, anime.destination.position);
@@ -367,7 +367,7 @@ XMLscene.prototype.moveCamera = function() {
 
 		}
 
-	
+
 }
 
 
@@ -392,8 +392,7 @@ XMLscene.prototype.display = function () {
   this.axis.display();
   this.board.display();
  // this.board.setPosition(1,3,3);
- 
-  this.changeCamera('Player1');
+
 
   if (this.graph.loadedOk)
   {

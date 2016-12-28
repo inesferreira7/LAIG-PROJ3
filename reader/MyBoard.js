@@ -18,6 +18,8 @@ function MyBoard(scene){
 	this.p2Points = 0;
   this.playing = this.p1;
 
+  this.scene.changeCamera('Player2');
+
 
 
 };
@@ -103,6 +105,10 @@ MyBoard.prototype.initBoardMatrix = function(){
 
 
 MyBoard.prototype.make_move = function(xi,yi,xf,yf){
+
+  if(this.playing == this.p1) this.scene.changeCamera('Player1');
+  if(this.playing == this.p2) this.scene.changeCamera('Player2');
+
         console.log("initial " + xi + " " + yi + " final " + xf + " " + yf );
 
         this.pieces[xf][yf] = this.pieces[xi][yi];
