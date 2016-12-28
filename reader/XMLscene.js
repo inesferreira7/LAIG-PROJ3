@@ -135,7 +135,7 @@ XMLscene.prototype.onGraphLoaded = function ()
   this.setGlobalAmbientLight(this.graph.illumination.ambient.r,this.graph.illumination.ambient.g,this.graph.illumination.ambient.b,this.graph.illumination.ambient.a);
   this.loadLights();
 
-  this.updateView();
+//  this.updateView();
 };
 
 XMLscene.prototype.setDefaultAppearance = function () {
@@ -451,13 +451,13 @@ XMLscene.prototype.updateLights = function(){
   }
 };
 
-XMLscene.prototype.updateView = function () {
+/*XMLscene.prototype.updateView = function () {
   this.camera = this.graph.perspectives[this.viewIndex];
   this.myInterface.setActiveCamera(this.graph.perspectives[this.viewIndex]);
 
   this.viewIndex = (++this.viewIndex) % this.graph.perspectives.length;
 };
-
+*/
 XMLscene.prototype.updateMaterials = function(){
 
   if(this.materialIndex < this.graph.maxMaterial)
