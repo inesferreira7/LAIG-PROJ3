@@ -40,23 +40,9 @@ MyInterface.prototype.init = function(application) {
 
 	this.defaultControls[3] = this.optionsFolder.add(this, 'difficulty', this.difficulties).name('Difficulty').listen();*/
 
-
-
-  this.omni=this.gui.addFolder("Omni lights:");
-	this.omni.open();
-
-  this.spot=this.gui.addFolder("Spot lights:");
-  this.spot.open();
-
 	return true;
 };
 
-MyInterface.prototype.addLight = function(type,i, name) {
-    if (type == "omni")
-        this.omni.add(this.scene.lightsBoolean, i, this.scene.lightsBoolean[i]).name(name);
-    if(type=="spot")
-       this.spot.add(this.scene.lightsBoolean, i, this.scene.lightsBoolean[i]).name(name);
-};
 
 
 MyInterface.prototype.processKeyDown = function(event) {
@@ -75,5 +61,6 @@ MyInterface.prototype.processKeyDown = function(event) {
 };
 
 MyInterface.prototype.startGame = function(){
+	this.scene.board.history = new MyHistory(this.scene);
  	this.scene.board.makeRequest('init');
  }

@@ -11,6 +11,8 @@ function MyBoard(scene){
   this.initBoardMatrix();
   this.initPieces();
 
+  this.history = new MyHistory(this.scene);
+
 
   this.p1 = "player1";
 	this.p1Points = 0;
@@ -18,7 +20,7 @@ function MyBoard(scene){
 	this.p2Points = 0;
   this.playing = this.p1;
 
-  //NOT SMOOTH CAMERA ANIMATION 
+  //NOT SMOOTH CAMERA ANIMATION
   //this.scene.changeCamera('Player2');
 
 
@@ -115,7 +117,7 @@ MyBoard.prototype.initBoardMatrix = function(){
 	}
 };
 
-MyBoard.prototype.make_move = function(xi,yi,xf,yf){
+MyBoard.prototype.make_move = function(xi,yi,xf,yf,playing,points){
 
   this.pieces[xi][yi].animation = new MyPieceAnimation(this.pieces[xi][yi], xi, yi, xf, yf, 2);
   this.pieces[xi][yi].moving = true;
@@ -128,23 +130,18 @@ MyBoard.prototype.make_move = function(xi,yi,xf,yf){
 	      this.pieces[xf][yf].x = xf;
 	      this.pieces[xf][yf].y = yf;
 
-        if(this.playing == this.p1)
- 		       this.playing = this.p2;
-       	else
-       		this.playing = this.p1;
-
- 	        this.scene.myInterface.playing = this.playing;
+        this.history.insertMove(xi,yi,xf,yf,playing,points);
 
 };
 
 
 MyBoard.prototype.showWinner = function(){
- 	if(this.p1Points > this.p2Points){
- 		this.winnerP = this.p1Points;
- 		this.winner = this.p1;
+ 	if(this.history.p1Points > this.history.p2Points){
+ 		this.winnerP = this.history.p1Points;
+ 		this.winner = this.history.player1;
  	} else{
- 		this.winner = this.p2;
- 		this.winnerP = this.p2Points;
+ 		this.winner = this.history.player2;
+ 		this.winnerP = this.history.p2Points;
  	}
  	console.log("The winner is " + this.winner + " with " + this.winnerP + " points!!");
  }

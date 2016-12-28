@@ -30,7 +30,8 @@ MyBoard.prototype.getPrologRequest = function(requestString, onSuccess, onError,
           console.log("Invalid play, pls try another move...");
         }
         else if(response != 'Bad Request'){
-          board.make_move(board.scene.objectPicked.x, board.scene.objectPicked.y, board.scene.destination.x, board.scene.destination.y);
+
+          board.make_move(board.scene.objectPicked.x, board.scene.objectPicked.y, board.scene.destination.x, board.scene.destination.y,board.history.playing,parseFloat(response));
           board.makeRequest('checkend(' + board.boardToList() + ',8,P1,P2)');
         }
 

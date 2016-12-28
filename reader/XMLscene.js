@@ -156,13 +156,13 @@ XMLscene.prototype.logPicking = function ()
 					var customId = this.pickResults[i][1];
           if(this.objectPicked != null){
             this.destination = obj;
-            if(this.board.playing == 'player1')
-              this.points = this.board.p1Points;
+            if(this.board.history.playing == 'player1')
+              this.points = this.board.history.p1Points;
             else
-              this.points = this.board.p2Points;
+              this.points = this.board.history.p2Points;
 
             this.board.makeRequest('make_play(' + this.board.boardToList() + ',' + this.objectPicked.y + ',' +
-            this.objectPicked.x + ',' + obj.y + ',' + obj.x + ',Nb,' + this.board.playing + ',' + this.points + ',Np)');
+            this.objectPicked.x + ',' + obj.y + ',' + obj.x + ',Nb,' + this.board.history.playing + ',' + this.points + ',Np)');
           }
           else{
           if(obj.type != "empty");
@@ -413,8 +413,6 @@ XMLscene.prototype.loadLights = function () {
     this.lights[index].update();
 
     this.lightsBoolean[index] = omni.enabled;
-
-    this.myInterface.addLight("omni",index, omni.id);
   }
 
   for(var i=0; i < this.graph.spotLights.length;i++,index++){
@@ -434,7 +432,6 @@ XMLscene.prototype.loadLights = function () {
     this.lights[index].update();
 
     this.lightsBoolean[index] = spot.enabled;
-    this.myInterface.addLight("spot",index, spot.id);
   }
 
 };
