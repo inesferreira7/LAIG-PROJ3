@@ -19,7 +19,7 @@ function MyBoard(scene){
   //NOT SMOOTH CAMERA ANIMATION
   //this.scene.changeCamera('Player2');
 
-
+this.finished=false;
 
 
 };
@@ -195,9 +195,11 @@ MyBoard.prototype.showWinner = function(){
  	if(this.history.p1Points > this.history.p2Points){
  		this.winnerP = this.history.p1Points;
  		this.winner = this.history.player1;
+    this.finished=true;
  	} else{
  		this.winner = this.history.player2;
  		this.winnerP = this.history.p2Points;
+    this.finished=true;
  	}
  	console.log("The winner is " + this.winner + " with " + this.winnerP + " points!!");
  }
