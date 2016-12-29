@@ -13,8 +13,10 @@ function MyBoard(scene){
   this.initPieces();
 
   this.isReplay = false;
-  
+
   this.history = null;
+
+  this.finished = false;
 
 
 
@@ -140,9 +142,9 @@ MyBoard.prototype.initBoardMatrix = function(){
 };
 
 MyBoard.prototype.make_move = function(xi,yi,xf,yf,playing,points){
-
-  this.pieces[xi][yi].animation = new MyPieceAnimation(this.pieces[xi][yi], xi, yi, xf, yf, 0.5);
-  this.pieces[xi][yi].moving = true;
+  if(this.finished == false){
+    this.pieces[xi][yi].animation = new MyPieceAnimation(this.pieces[xi][yi], xi, yi, xf, yf, 0.5);
+    this.pieces[xi][yi].moving = true;
 
         console.log("initial " + xi + " " + yi + " final " + xf + " " + yf );
         this.history.insertMove(new MyMove(this.scene, xi, yi, xf, yf, this.pieces[xi][yi], this.pieces[xf][yf], playing, points));
@@ -172,13 +174,13 @@ MyBoard.prototype.make_move = function(xi,yi,xf,yf,playing,points){
 	      this.pieces[xf][yf].x = xf;
 	      this.pieces[xf][yf].y = yf;
 
-
+      }
 
 
 }
 
 MyBoard.prototype.get_bot_move = function(msg){
-
+  if(this.finished == false){
  var yi = parseFloat(msg.substring(1,2));
  var xi = parseFloat(msg.substring(3,4));
  var yf = parseFloat(msg.substring(5,6));
@@ -190,6 +192,7 @@ MyBoard.prototype.get_bot_move = function(msg){
  }
 
  this.make_move(xi, yi, xf, yf, this.history.playing, np);
+ }
 }
 
 MyBoard.prototype.showWinner = function(){

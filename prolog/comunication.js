@@ -19,6 +19,7 @@ MyBoard.prototype.getPrologRequest = function(requestString, onSuccess, onError,
 
       if(response == 'endgame'){
        board.showWinner();
+       board.finished = true;
        return;
      }
 
