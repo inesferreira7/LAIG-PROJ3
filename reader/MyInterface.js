@@ -43,7 +43,7 @@ var self = this;
 		this.optionsFolder.open();
 
 		this.defaultControls[5] = this.optionsFolder.add(this, 'difficulty', this.difficulties).name('Difficulty').listen();
-		//this.defaultControls[6] = this.optionsFolder.add(this,'undo').name('Undo');
+		this.defaultControls[6] = this.optionsFolder.add(this,'lastMove').name('Undo');
 
 	return true;
 };
@@ -81,3 +81,7 @@ MyInterface.prototype.startGame = function(){
 			this.scene.board.makeRequest('bot_play(' + this.scene.board.boardToList() + ',' + this.scene.board.history.playing + ',' + this.points + ',' + this.scene.board.history.difficulty + ')');
 	}
  }
+
+ MyInterface.prototype.lastMove = function(){
+	this.scene.board.undo();
+}
