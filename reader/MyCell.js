@@ -27,9 +27,11 @@ function MyCell(scene, x, y, object, color) {
   }
 
 	if(color == "transp"){
-		this.appearance.setAmbient(0,0,0,0);
-		this.appearance.setDiffuse(0,0,0,0);
-		this.appearance.setSpecular(0,0,0,0);
+
+			this.appearance.loadTexture("res/casino_towel.jpg");
+			this.appearance.setDiffuse(1,1,1,1);
+			this.appearance.setSpecular(0.5,0.5,0.5,1);
+			this.appearance.setShininess(100);
 	}
 
 
