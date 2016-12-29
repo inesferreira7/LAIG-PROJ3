@@ -6,7 +6,7 @@ function MyCell(scene, x, y, object, color) {
   this.x = x;
   this.y = y;
 	this.id=null;
-
+	this.free = true;
   this.transfMat = mat4.create();
   mat4.identity(this.transfMat);
   var posx = 2 * this.x;
@@ -25,6 +25,12 @@ function MyCell(scene, x, y, object, color) {
     this.appearance.setDiffuse(1, 1, 1, 1);
     this.appearance.setSpecular(1, 1, 1, 1);
   }
+
+	if(color == "transp"){
+		this.appearance.setAmbient(0,0,0,0);
+		this.appearance.setDiffuse(0,0,0,0);
+		this.appearance.setSpecular(0,0,0,0);
+	}
 
 
   mat4.translate(this.transfMat, this.transfMat, [posx, 0, posy]);

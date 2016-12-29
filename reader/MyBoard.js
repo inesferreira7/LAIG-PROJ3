@@ -9,6 +9,7 @@ function MyBoard(scene){
   this.scene = scene;
 
   this.initBoardMatrix();
+  //this.initAuxiliarBoard();
   this.initPieces();
 
   this.history = null;
@@ -26,6 +27,19 @@ function MyBoard(scene){
 
 MyBoard.prototype = Object.create(CGFobject.prototype);
 MyBoard.prototype.constructor = MyBoard;
+
+// MyBoard.prototype.initAuxiliarBoard = function(){
+//
+//    this.auxiliar=[];
+//    var color;
+//
+//    for(var x=0; x<5; x++){
+//      this.auxiliar.push([]);
+//      for(var y=0; y<4; y++){
+//        this.auxiliar[x].push(new MyCell(this.scene, x, y, new Cube(this.scene, 2, 0.2, 2), "transp"));
+//      }
+//    }
+//  };
 
 MyBoard.prototype.initBoardMatrix = function(){
 
@@ -100,6 +114,16 @@ MyBoard.prototype.initBoardMatrix = function(){
      }
    }
    this.scene.popMatrix();
+
+  //  this.scene.pushMatrix();
+  //  this.scene.scale(0.4,0.4,0.4);
+  //  this.scene.translate(0,0,-6);
+  //  for(var x=0; x < this.auxiliar.length;x++){
+  //    for(var y=0; y < 4; y++){
+  //      this.auxiliar[x][y].display();
+  //       }
+  //  }
+  //  this.scene.popMatrix();
  };
 
  MyBoard.prototype.update = function(currTime){
@@ -121,11 +145,31 @@ MyBoard.prototype.make_move = function(xi,yi,xf,yf,playing,points){
         console.log("initial " + xi + " " + yi + " final " + xf + " " + yf );
         this.history.insertMove(new MyMove(this.scene, xi, yi, xf, yf, this.pieces[xi][yi], this.pieces[xf][yf], playing, points));
 
+        // break_loop:
+        // if(this.pieces[xf][yf] != ""){
+        // for(var x=0; x < this.auxiliar.length; x++){
+        //   for(var y=0; y < 4; y++){
+        //     if(this.auxiliar[x][y].free == true){
+        //
+        //       console.log(this.auxiliar[x][y].x);
+        //       console.log(this.auxiliar[x][y].y);
+        //       console.log(this.auxiliar[x][y].free);
+        //       this.auxiliar[x][y] = this.pieces[xf][yf];
+        //       this.auxiliar[x][y].free = false;
+        //       console.log(this.auxiliar[x][y].free);
+        //       break break_loop;
+        //     }
+        //
+        //   }
+        //   }
+        // }
+
         this.pieces[xf][yf] = this.pieces[xi][yi];
 	      this.pieces[xi][yi] = "";
 
 	      this.pieces[xf][yf].x = xf;
 	      this.pieces[xf][yf].y = yf;
+
 
 
 
