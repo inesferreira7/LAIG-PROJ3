@@ -27,6 +27,7 @@ MyInterface.prototype.init = function(application) {
 	this.type = 'P vs P';
 	this.types = ['P vs P', 'P vs CPU', 'CPU vs CPU'];
 
+	this.started = 0;
 	this.p1Points = 0;
 	this.p2Points = 0;
 
@@ -69,6 +70,7 @@ MyInterface.prototype.startGame = function(){
 
 	this.scene.board.history = new MyHistory(this.scene);
 	this.scene.board.makeRequest('init');
+	this.started = 1;
 
 	this.scene.setPickEnabled(true);
 

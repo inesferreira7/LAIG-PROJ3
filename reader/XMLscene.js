@@ -42,6 +42,7 @@ XMLscene.prototype.init = function (application) {
   this.axis=new CGFaxis(this);
   this.board = new MyBoard(this);
 
+  this.currentState = 1;
 
   this.objects = [];
 
@@ -117,11 +118,11 @@ XMLscene.prototype.initCameras = function () {
   this.perspectives = [];
 
   this.perspectives[0] = new Perspective('Default', vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
-  this.perspectives[1] = new Perspective('Player1', vec3.fromValues(15, 8, 0), vec3.fromValues(0, 0, 0));
-  this.perspectives[2] = new Perspective('Player2', vec3.fromValues(-15, 8, 0), vec3.fromValues(0, 0, 0));
+  this.perspectives[1] = new Perspective('Player2', vec3.fromValues(15, 8, 0), vec3.fromValues(0, 0, 0));
+  this.perspectives[2] = new Perspective('Player1', vec3.fromValues(-15, 8, 0), vec3.fromValues(0, 0, 0));
 
 
-  this.camera = new CGFcamera(0.4, 0.1, 500, this.perspectives[0].position, this.perspectives[0].direction);
+  this.camera = new CGFcamera(0.4, 0.1, 500, this.perspectives[2].position, this.perspectives[2].direction);
 
   this.cameraAnimation = null;
 
@@ -264,6 +265,17 @@ XMLscene.prototype.createGraph = function(initialNode){
 
 XMLscene.prototype.update = function(currTime) {
 
+ if (this.startTime == 0)		this.startTime = currTime;
+	 
+    else{
+ 	   
+ 	   if(this.cameraAnimation != null){
+ 		   this.elapsedTime = currTime - this.startTime;
+ 		   this.moveCamera();
+ 	   }
+ 	   
+   }
+
   this.elapsedTime = currTime / 1000;
  this.time = currTime;
  this.board.update(currTime);
@@ -385,6 +397,12 @@ XMLscene.prototype.display = function () {
   this.setDefaultAppearance();
   //this.axis.display();
   this.board.display();
+  
+   if(this.myInterface.started == 1){
+	  
+	  this.cameraControl();
+  }
+  
  // this.board.setPosition(1,3,3);
 
 
@@ -393,6 +411,66 @@ XMLscene.prototype.display = function () {
     this.createGraph("start");
   }
 
+};
+
+XMLscene.prototype.readState = function(state){
+	if (this.currentState == state){
+		return;
+	}
+
+	else{
+		
+		this.currentState = state;
+		if(state == 1){
+			console.log('SUPPOSED TO BE 1' + state);
+			this.changeCamera('Player1');
+			this.startTime = 0;
+			
+		}
+		else{
+			if(state == 2){
+			
+				console.log('SUPPOSED TO BE 2' + state);
+				this.changeCamera('Player2');
+				this.startTime = 0;
+			
+		}
+			else{
+				console.log ('WTF IS STATE VALUE HEERE!!!!!!!! ' + state);
+				this.changeCamera('Default');
+				this.startTime = 0;
+			
+			}
+		}
+	}
+	
+};
+
+
+XMLscene.prototype.cameraControl = function() {
+	
+		var state = 1;
+		
+	   if(this.board.isReplay == true)
+	  this.changeCamera('Default');
+	else{
+	
+	//	if(this.board.isDone == true){
+  
+		if(this.board.history.isP1 == true){
+			
+			state = 1;
+		
+		}
+		if(this.board.history.isP1 == false){
+			
+			state = 2;
+		
+		}
+	//	}
+		this.readState(state);
+	}
+	
 };
 
 XMLscene.prototype.loadLights = function () {

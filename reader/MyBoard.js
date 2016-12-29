@@ -12,6 +12,8 @@ function MyBoard(scene){
   //this.initAuxiliarBoard();
   this.initPieces();
 
+  this.isReplay = false;
+  
   this.history = null;
 
 

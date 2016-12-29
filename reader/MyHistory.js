@@ -6,6 +6,7 @@ this.player2="player2";
 this.playing = this.player1;
 this.p1Points=0;
 this.p2Points=0;
+this.isP1 = true;
 
 switch(this.scene.myInterface.type){
    case 'P vs P':
@@ -36,9 +37,11 @@ MyHistory.prototype.insertMove = function(move){
   if(this.playing == this.player1){
     this.playing = this.player2;
     this.p1Points = move.points;
+	this.isP1 = false;
   } else{
     this.playing = this.player1;
     this.p2Points = move.points;
+	this.isP1 = true;
   }
 
   this.scene.myInterface.p1Points = this.p1Points;
