@@ -200,3 +200,84 @@ MyBoard.prototype.showWinner = function(){
  	}
  	console.log("The winner is " + this.winner + " with " + this.winnerP + " points!!");
  }
+
+ MyBoard.prototype.undo = function(){
+	if(this.history.type == 1){
+
+		if(this.history.moves.length < 1)
+			return;
+
+		var lastMove = this.history.moves[this.history.moves.length - 1];
+		this.history.moves.pop();
+
+
+		if(lastMove.initialElement != ""){
+			lastMove.initialElement.x = lastMove.xi;
+			lastMove.initialElement.y = lastMove.yi;
+		}
+
+		if(lastMove.finalElement != ""){
+			lastMove.finalElement.x = lastMove.xf;
+			lastMove.finalElement.y = lastMove.yf;
+		}
+
+		this.pieces[lastMove.xf][lastMove.yf] = lastMove.finalElement;
+		this.pieces[lastMove.xi][lastMove.yi] = lastMove.initialElement;
+
+		this.history.playing = lastMove.playing;
+		this.scene.myInterface.playing = lastMove.playing;
+
+		if(this.history.playing == this.history.player1){
+			this.history.p1Points = lastMove.points;
+		}
+	}
+	else if(this.history.type == 2){
+
+		if(this.history.moves.length < 2)
+			return;
+
+		var penultimateMove = this.history.moves[this.history.moves.length - 1];
+		var lastMove = this.history.moves[this.history.moves.length - 2];
+
+		this.history.moves.pop();
+		this.history.moves.pop();
+
+    var xi = lastMove.xi;
+    var yi = lastMove.yi;
+    var xf = lastMove.xf;
+    var yf = lastMove.yf;
+
+		if(lastMove.initialElement != ""){
+			lastMove.initialElement.x = lastMove.xi;
+			lastMove.initialElement.y = lastMove.yi;
+		}
+
+		if(lastMove.finalElement != ""){
+			lastMove.finalElement.x = lastMove.xf;
+			lastMove.finalElement.y = lastMove.yf;
+		}
+
+		this.pieces[lastMove.xf][lastMove.yf] = lastMove.finalElement;
+		this.pieces[lastMove.xi][lastMove.yi] = lastMove.initialElement;
+
+    var xi1 = penultimateMove.xi;
+		var yi1 = penultimateMove.yi;
+		var xf1 = penultimateMove.xf;
+		var yf1 = penultimateMove.yf;
+
+
+
+		if(penultimateMove.initialElement != ""){
+			penultimateMove.initialElement.x =  xi1;
+			penultimateMove.initialElement.y =  yi1;
+		}
+
+		if(penultimateMove.finalElement != ""){
+			penultimateMove.finalElement.x = xf1;
+			penultimateMove.finalElement.y = yf1;
+		}
+
+		this.pieces[xf1][yf1] = penultimateMove.finalElement;
+		this.pieces[xi1][yi1] = penultimateMove.initialElement;
+	}
+}
