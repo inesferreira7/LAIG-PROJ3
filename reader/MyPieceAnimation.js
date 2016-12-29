@@ -15,6 +15,7 @@
 
    this.matrix = mat4.create();
    mat4.translate(this.matrix, this.matrix, [this.deltaX, 0, this.deltaZ]);
+
  }
 
 MyPieceAnimation.prototype = new MyAnimation();
