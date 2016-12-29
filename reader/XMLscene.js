@@ -266,14 +266,14 @@ XMLscene.prototype.createGraph = function(initialNode){
 XMLscene.prototype.update = function(currTime) {
 
  if (this.startTime == 0)		this.startTime = currTime;
-	 
+
     else{
- 	   
+
  	   if(this.cameraAnimation != null){
  		   this.elapsedTime = currTime - this.startTime;
  		   this.moveCamera();
  	   }
- 	   
+
    }
 
   this.elapsedTime = currTime / 1000;
@@ -397,12 +397,12 @@ XMLscene.prototype.display = function () {
   this.setDefaultAppearance();
   //this.axis.display();
   this.board.display();
-  
+
    if(this.myInterface.started == 1){
-	  
+
 	  this.cameraControl();
   }
-  
+
  // this.board.setPosition(1,3,3);
 
 
@@ -414,63 +414,74 @@ XMLscene.prototype.display = function () {
 };
 
 XMLscene.prototype.readState = function(state){
+  if(this.board.history.type == 1 ){
 	if (this.currentState == state){
 		return;
 	}
 
 	else{
-		
+
 		this.currentState = state;
 		if(state == 1){
-			console.log('SUPPOSED TO BE 1' + state);
-			this.changeCamera('Player1');
-			this.startTime = 0;
-			
+    //setTimeout(function(){
+        	console.log('SUPPOSED TO BE 1' + state);
+        this.changeCamera('Player1');
+        this.startTime = 0;
+    //  }, 1500);
+
+
 		}
 		else{
 			if(state == 2){
-			
-				console.log('SUPPOSED TO BE 2' + state);
-				this.changeCamera('Player2');
-				this.startTime = 0;
-			
+        //setTimeout(function(){
+          console.log('SUPPOSED TO BE 2' + state);
+  				this.changeCamera('Player2');
+  				this.startTime = 0;
+        //},1500);
+
+
 		}
 			else{
 				console.log ('WTF IS STATE VALUE HEERE!!!!!!!! ' + state);
 				this.changeCamera('Default');
 				this.startTime = 0;
-			
+
 			}
 		}
 	}
-	
+}
+
+if(this.board.history.type == 3){
+  this.changeCamera('Default');
+}
+
 };
 
 
 XMLscene.prototype.cameraControl = function() {
-	
+
 		var state = 1;
-		
+
 	   if(this.board.isReplay == true)
 	  this.changeCamera('Default');
 	else{
-	
+
 	//	if(this.board.isDone == true){
-  
+
 		if(this.board.history.isP1 == true){
-			
+
 			state = 1;
-		
+
 		}
 		if(this.board.history.isP1 == false){
-			
+
 			state = 2;
-		
+
 		}
 	//	}
 		this.readState(state);
 	}
-	
+
 };
 
 XMLscene.prototype.loadLights = function () {
