@@ -33,6 +33,8 @@ MyInterface.prototype.init = function(application) {
 	this.started = 0;
 	this.p1Points = 0;
 	this.p2Points = 0;
+	this.timeLeft = 20;
+	this.countdownTimer;
 
 this.gui.autoListen = false;
 var self = this;
@@ -40,17 +42,19 @@ var self = this;
 
 		this.defaultControls[0] = this.gui.add(this,'startGame').name('Start Game');
 		this.defaultControls[1] = this.gui.add(this, 'playing').name('Playing').listen();
-		this.defaultControls[2] = this.gui.add(this, 'p1Points', this.p1Points).name('Player1 Points').listen();
-		this.defaultControls[3] = this.gui.add(this, 'p2Points', this.p2Points).name('Player2 Points').listen();
-		this.defaultControls[4] = this.gui.add(this, 'type', this.types).name('Type of game').listen();
+		this.defaultControls[2] = this.gui.add(this, 'timeLeft').name('Countdown').listen();
+		this.defaultControls[3] = this.gui.add(this, 'p1Points', this.p1Points).name('Player1 Points').listen();
+		this.defaultControls[4] = this.gui.add(this, 'p2Points', this.p2Points).name('Player2 Points').listen();
+		this.defaultControls[5] = this.gui.add(this, 'type', this.types).name('Type of game').listen();
 		this.optionsFolder = this.gui.addFolder('Options');
 		this.optionsFolder.open();
 
-		this.defaultControls[5] = this.optionsFolder.add(this, 'difficulty', this.difficulties).name('Difficulty').listen();
-		this.defaultControls[6] = this.optionsFolder.add(this,'lastMove').name('Undo');
-		this.defaultControls[7] = this.optionsFolder.add(this,'gameMovie').name('See Game Movie');
-		this.defaultControls[8] = this.optionsFolder.add(this, 'skin',this.skins).name('Appearance').listen();
-		this.defaultControls[9] = this.optionsFolder.add(this, 'change').name('Change');
+		this.defaultControls[6] = this.optionsFolder.add(this, 'difficulty', this.difficulties).name('Difficulty').listen();
+		this.defaultControls[7] = this.optionsFolder.add(this,'lastMove').name('Undo');
+		this.defaultControls[8] = this.optionsFolder.add(this,'gameMovie').name('See Game Movie');
+		this.defaultControls[9] = this.optionsFolder.add(this, 'skin',this.skins).name('Appearance').listen();
+		this.defaultControls[10] = this.optionsFolder.add(this, 'change').name('Change');
+
 
 
 	return true;
@@ -154,6 +158,8 @@ MyInterface.prototype.startGame = function(){
 	this.started = 1;
 
 	this.scene.setPickEnabled(true);
+	//this.scene.board.countdown();
+	this.countdown();
 
 	if(this.scene.board.history.type == 3){
 			if(this.scene.board.history.playing == this.scene.board.history.player1)
@@ -168,3 +174,26 @@ MyInterface.prototype.startGame = function(){
  MyInterface.prototype.lastMove = function(){
 	this.scene.board.undo();
 }
+
+MyInterface.prototype.countdown = function(){
+
+	var _this = this;
+
+	_this.countdownTimer = setInterval(function () {
+				_this.countUp();
+		}, 1000);
+}
+
+MyInterface.prototype.countUp = function(){
+	if(this.timeLeft >0){
+		this.timeLeft--;
+	}
+	else{
+		this.scene.board.history.changeJogada();
+			clearInterval(this.countdownTimer);
+			this.timeLeft = 20;
+			this.countdown();
+		}
+
+
+	}

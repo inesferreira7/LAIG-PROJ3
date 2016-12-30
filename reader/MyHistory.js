@@ -31,7 +31,26 @@ this.moves=[];
 
 }
 
+MyHistory.prototype.changeJogada = function(){
+
+  console.log("entrou");
+
+  if(this.playing == this.player1){
+    this.playing = this.player2;
+	this.isP1 = false;
+  } else{
+    this.playing = this.player1;
+	this.isP1 = true;
+  }
+
+  this.scene.myInterface.p1Points = this.p1Points;
+  this.scene.myInterface.p2Points = this.p2Points;
+  this.scene.myInterface.playing = this.playing;
+
+}
+
 MyHistory.prototype.insertMove = function(move){
+  this.scene.myInterface.timeLeft = 20;
   this.moves.push(move);
 
   if(this.playing == this.player1){
