@@ -38,9 +38,11 @@ XMLscene.prototype.init = function (application) {
   this.setUpdatePeriod(100/6);
 
   this.startTime = 0;
-
+  this.choose = 1;
+	
   this.axis=new CGFaxis(this);
   this.board = new MyBoard(this);
+  this.completedAnime = false;
 
   this.currentState = 1;
 
@@ -120,6 +122,8 @@ XMLscene.prototype.initCameras = function () {
   this.perspectives[0] = new Perspective('Default', vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
   this.perspectives[1] = new Perspective('Player2', vec3.fromValues(15, 8, 0), vec3.fromValues(0, 0, 0));
   this.perspectives[2] = new Perspective('Player1', vec3.fromValues(-15, 8, 0), vec3.fromValues(0, 0, 0));
+  this.perspectives[3] = new Perspective('mid1to2', vec3.fromValues(0, 15, -20), vec3.fromValues(0, 0, 0));
+  this.perspectives[4] = new Perspective('mid2to1', vec3.fromValues(0, 15, 20), vec3.fromValues(0, 0, 0));
 
 
   this.camera = new CGFcamera(0.4, 0.1, 500, this.perspectives[2].position, this.perspectives[2].direction);
@@ -369,6 +373,7 @@ XMLscene.prototype.moveCamera = function() {
 			vec3.copy(camera.position, anime.destination.position);
 			vec3.copy(camera.direction, anime.destination.direction);
 			vec3.copy(camera.target, anime.destination.direction);
+			this.completedAnime = true;
 			this.cameraAnimation = null;
 
 		}
@@ -414,8 +419,25 @@ XMLscene.prototype.display = function () {
 };
 
 XMLscene.prototype.readState = function(state){
+	
+	
+	
   if(this.board.history.type == 1 ){
 	if (this.currentState == state){
+		
+		if(this.completedAnime == true && this.choose == 1){
+			
+		this.changeCamera('Player1');
+		this.choose = 3;
+		
+		}
+		
+		if(this.completedAnime == true && this.choose == 2){
+		
+		this.changeCamera('Player2');
+		this.choose = 3;
+		}
+		
 		return;
 	}
 
@@ -423,40 +445,76 @@ XMLscene.prototype.readState = function(state){
 
 		this.currentState = state;
 		if(state == 1){
-    //setTimeout(function(){
-        	console.log('SUPPOSED TO BE 1' + state);
-        this.changeCamera('Player1');
-        this.startTime = 0;
-    //  }, 1500);
-
-
+	//setTimeout(midCam1,1500, this);
+	//setTimeout(p1Cam,9500, this);
+	
+		this.completedAnime = false;
+		this.changeCamera('mid2to1');
+		this.choose = 1;
+		
+		this.startTime = 0;
+	
 		}
 		else{
 			if(state == 2){
-        //setTimeout(function(){
-          console.log('SUPPOSED TO BE 2' + state);
-  				this.changeCamera('Player2');
-  				this.startTime = 0;
-        //},1500);
-
-
-		}
+				
+	//setTimeout(midCam2,1500, this);
+	//setTimeout(p2Cam,9500, this);
+	
+		this.completedAnime = false;
+	
+		this.changeCamera('mid1to2');
+		
+		this.choose = 2;
+		
+		this.startTime = 0;
+			}
+						
 			else{
-				console.log ('WTF IS STATE VALUE HEERE!!!!!!!! ' + state);
 				this.changeCamera('Default');
+				this.choose = 0;
 				this.startTime = 0;
 
 			}
 		}
+			
 	}
-}
-
+  }
+  
+  
 if(this.board.history.type == 3){
   this.changeCamera('Default');
 }
 
 };
 
+
+function midCam1(scene){
+	
+	this.startTime = 0;
+	this.changeCamera('mid2to1');
+	
+};
+
+function midCam2(scene){
+	
+	this.startTime = 0;
+	this.changeCamera('mid1to2');
+	
+};
+
+function p1Cam(scene){
+	
+	this.startTime = 0;
+	this.changeCamera('Player1');
+	
+};
+
+function p2Cam(scene){
+	this.startTime = 0;
+	this.changeCamera('Player2');
+	
+};
 
 XMLscene.prototype.cameraControl = function() {
 

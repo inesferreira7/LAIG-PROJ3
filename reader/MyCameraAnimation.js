@@ -2,7 +2,7 @@
 
  	this.origin = origin;
  	this.destination = destination;
-	this.span = 75000;
+	this.span = 100000;
  	var originPosition = this.origin.position;
  	var destinationPosition = this.destination.position;
 	//set distance for position
