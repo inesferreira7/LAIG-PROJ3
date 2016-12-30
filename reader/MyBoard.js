@@ -175,6 +175,7 @@ MyBoard.prototype.make_move = function(xi,yi,xf,yf,playing,points){
 
 }
 
+
 MyBoard.prototype.get_bot_move = function(msg){
   if(this.finished == false){
  var yi = parseFloat(msg.substring(1,2));

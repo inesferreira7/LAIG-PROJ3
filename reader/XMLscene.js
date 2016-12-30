@@ -553,3 +553,8 @@ XMLscene.prototype.updateMaterials = function(){
   }
 
 };
+
+XMLscene.prototype.changeApp = function(filename){
+  
+  this.graph = new MySceneGraph(filename, this);
+}
