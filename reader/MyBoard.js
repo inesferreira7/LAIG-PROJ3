@@ -284,17 +284,4 @@ MyBoard.prototype.showWinner = function(){
 		this.pieces[xi1][yi1] = penultimateMove.initialElement;
 	}
 }
-
-MyBoard.prototype.countdown = function(){
- var time = this.scene.myInterface.timeLeft;
-  var countdownTimer = setInterval(function(){
-    console.log(time);
-    if(time > 0){
-    time--;
-  }
-  else{
-    clearInterval(countdownTimer);
-  }
-},1000);
-
 }
