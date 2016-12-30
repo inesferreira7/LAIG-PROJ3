@@ -83,26 +83,26 @@
 
     <transformation id="tampo">
       <translate x="0" y="-0.3" z="0"/>
-      <scale x="10" y="0.6" z="6" />
+      <scale x="10" y="0.6" z="6.7" />
     </transformation>
 
     <transformation id="leg1">
-      <translate x="-4.5" y="-2" z="-2.5" />
+      <translate x="-4.5" y="-2" z="-2" />
       <scale x="0.6" y="3.5" z="0.6" />
     </transformation>
 
     <transformation id="leg2">
-      <translate x="-4.5" y="-2" z="2.5" />
+      <translate x="-4.5" y="-2" z="2" />
       <scale x="0.6" y="3.5" z="0.6" />
     </transformation>
 
     <transformation id="leg3">
-      <translate x="4.5" y="-2" z="-2.5" />
+      <translate x="4.5" y="-2" z="-2" />
       <scale x="0.6" y="3.5" z="0.6" />
     </transformation>
 
     <transformation id="leg4">
-      <translate x="4.5" y="-2" z="2.5" />
+      <translate x="4.5" y="-2" z="2" />
       <scale x="0.6" y="3.5" z="0.6" />
     </transformation>
 
