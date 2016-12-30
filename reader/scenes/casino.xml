@@ -111,19 +111,25 @@
     <transformation id="leftwall">
       <rotate axis="y" angle="90"/>
       <translate x="4" y="0" z="-15"/>
-      <scale x="18" y="15" z="1" />
+      <scale x="30" y="18" z="1" />
     </transformation>
 
     <transformation id="rightwall">
       <rotate axis="z" angle="90"/>
       <translate x="0" y="7" z="-13"/>
-      <scale x="15" y="18" z="1" />
+      <scale x="18" y="35" z="1" />
     </transformation>
 
     <transformation id="floor">
       <rotate axis="x" angle="-90"/>
       <translate x="-3" y="0" z="-4" />
       <scale x="25" y="25" z="1" />
+    </transformation>
+
+    <transformation id="otherwall">
+      <rotate axis="y" angle="-90"/>
+      <translate x="-3" y="0" z="-10" />
+      <scale x="35" y="35" z="1" />
     </transformation>
 
   </transformations>
@@ -235,6 +241,7 @@
         <componentref id="floor"/>
         <componentref id="leftwall"/>
         <componentref id="rightwall"/>
+        <componentref id="otherwall"/>
       </children>
 
       <materials>
@@ -345,7 +352,7 @@
                       <material id="material1" />
                   </materials>
 
-                  <texture id="casino_wall" />
+                  <texture id="floor" />
 
                   </component>
 
@@ -362,7 +369,7 @@
                         <material id="material1" />
                     </materials>
 
-                    <texture id="casino_wall" />
+                    <texture id="floor" />
 
                     </component>
 
@@ -382,6 +389,23 @@
                       <texture id="floor" />
 
                       </component>
+
+                      <component id="otherwall">
+                        <transformation>
+                          <transformationref id="otherwall"/>
+                        </transformation>
+
+                        <children>
+                          <primitiveref id="quad" />
+                        </children>
+
+                        <materials>
+                            <material id="material1" />
+                        </materials>
+
+                        <texture id="floor" />
+
+                        </component>
 
 
 
