@@ -120,8 +120,8 @@ XMLscene.prototype.initCameras = function () {
   this.perspectives = [];
 
   this.perspectives[0] = new Perspective('Default', vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
-  this.perspectives[1] = new Perspective('Player2', vec3.fromValues(15, 8, 0), vec3.fromValues(0, 0, 0));
-  this.perspectives[2] = new Perspective('Player1', vec3.fromValues(-15, 8, 0), vec3.fromValues(0, 0, 0));
+  this.perspectives[1] = new Perspective('Player2', vec3.fromValues(15, 12, 3), vec3.fromValues(0, 0, 0));
+  this.perspectives[2] = new Perspective('Player1', vec3.fromValues(-15, 12, 2), vec3.fromValues(0, 0, 0));
   this.perspectives[3] = new Perspective('mid1to2', vec3.fromValues(0, 15, -20), vec3.fromValues(0, 0, 0));
   this.perspectives[4] = new Perspective('mid2to1', vec3.fromValues(0, 15, 20), vec3.fromValues(0, 0, 0));
 
@@ -425,7 +425,7 @@ XMLscene.prototype.readState = function(state){
   if(this.board.history.type == 1 ){
 	if (this.currentState == state){
 		
-		if(this.completedAnime == true && this.choose == 1){
+		/*if(this.completedAnime == true && this.choose == 1){
 			
 		this.changeCamera('Player1');
 		this.choose = 3;
@@ -436,7 +436,7 @@ XMLscene.prototype.readState = function(state){
 		
 		this.changeCamera('Player2');
 		this.choose = 3;
-		}
+		}*/
 		
 		return;
 	}
@@ -449,7 +449,7 @@ XMLscene.prototype.readState = function(state){
 	//setTimeout(p1Cam,9500, this);
 	
 		this.completedAnime = false;
-		this.changeCamera('mid2to1');
+		this.changeCamera('Player1');
 		this.choose = 1;
 		
 		this.startTime = 0;
@@ -463,7 +463,7 @@ XMLscene.prototype.readState = function(state){
 	
 		this.completedAnime = false;
 	
-		this.changeCamera('mid1to2');
+		this.changeCamera('Player2');
 		
 		this.choose = 2;
 		
