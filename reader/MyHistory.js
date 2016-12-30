@@ -50,6 +50,7 @@ MyHistory.prototype.changeJogada = function(){
 }
 
 MyHistory.prototype.insertMove = function(move){
+  this.scene.myInterface.timeLeft = 20;
   this.moves.push(move);
 
   if(this.playing == this.player1){

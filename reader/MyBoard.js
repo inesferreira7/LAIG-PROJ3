@@ -284,4 +284,3 @@ MyBoard.prototype.showWinner = function(){
 		this.pieces[xi1][yi1] = penultimateMove.initialElement;
 	}
 }
-}
