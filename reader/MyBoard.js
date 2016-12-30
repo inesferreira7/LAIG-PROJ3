@@ -116,7 +116,7 @@ MyBoard.prototype.initBoardMatrix = function(){
 
    this.scene.pushMatrix();
    this.scene.translate(-1.5,-0.1,-1.5);
-   this.scene.scale(0.30,0.30,0.26);
+   this.scene.scale(0.37,0.37,0.37);
    for(var x=0; x <5;x++){
      for(var y=0; y < 4; y++){
        this.auxiliar[x][y].display();

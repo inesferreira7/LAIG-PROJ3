@@ -83,7 +83,7 @@
 
     <transformation id="tampo">
       <translate x="0" y="-0.3" z="0"/>
-      <scale x="10" y="0.6" z="6.7" />
+      <scale x="10" y="0.6" z="8.1" />
     </transformation>
 
     <transformation id="leg1">
