@@ -35,6 +35,7 @@ MyInterface.prototype.init = function(application) {
 	this.p2Points = 0;
 	this.timeLeft = 20;
 	this.countdownTimer;
+	this.defaultcheck = 0;
 
 this.gui.autoListen = false;
 var self = this;
@@ -75,6 +76,15 @@ MyInterface.prototype.processKeyDown = function(event) {
 				case(109):
 						this.scene.updateMaterials();
 						break;
+							case(67):
+							case(99):
+							this.defaultcheck++;
+							if(this.defaultcheck > 2){
+								this.defaultcheck = 1;
+							}
+							this.scene.checkDefault();
+							break;
+							
     };
 
 };

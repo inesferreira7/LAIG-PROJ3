@@ -442,6 +442,8 @@ XMLscene.prototype.readState = function(state){
 	}
 
 	else{
+		
+		this.checkDefault();
 
 		this.currentState = state;
 		if(state == 1){
@@ -540,6 +542,33 @@ XMLscene.prototype.cameraControl = function() {
 		this.readState(state);
 	}
 
+};
+
+
+XMLscene.prototype.checkDefault = function() {
+	
+	
+	if(this.myInterface.defaultcheck == 1)
+	{
+		if(this.board.history.isP1 == true){
+
+			this.changeCamera('Player1');
+
+		}
+		if(this.board.history.isP1 == false){
+
+			this.changeCamera('Player2');
+
+		}
+	}
+	
+	else{
+		
+		this.changeCamera('Default');
+		
+	}
+	
+	
 };
 
 XMLscene.prototype.loadLights = function () {

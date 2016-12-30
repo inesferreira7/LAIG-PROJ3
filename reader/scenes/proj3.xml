@@ -21,7 +21,7 @@
 
   <textures>
     <texture id="wood" file="./res/wood.jpg" length_s="1.0" length_t="1.0" />
-    <texture id="grass" file="./res/relva.jpg" length_s="1.0" length_t="1.0" />
+    <texture id="grass" file="./res/grasse.jpg" length_s="1.0" length_t="1.0" />
   </textures>
 
   <lights>
@@ -83,7 +83,7 @@
 
     <transformation id="tampo">
       <translate x="0" y="-0.3" z="0"/>
-      <scale x="10" y="0.6" z="8.1" />
+      <scale x="11" y="0.65" z="8.3" />
     </transformation>
 
     <transformation id="leg1">
@@ -109,7 +109,7 @@
     <transformation id="grass">
       <translate x="0" y="-3.5" z="0" />
       <rotate axis="x" angle="-90" />
-      <scale x="15" y="15" z="3" />
+      <scale x="35" y="35" z="20" />
     </transformation>
 
 
