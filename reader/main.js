@@ -14,7 +14,7 @@ function getUrlVars() {
 serialInclude(['../lib/CGF.js','MyNode.js','utils.js','MyInterface.js', 'MyChessboard.js', 'MySceneGraph.js', 'XMLscene.js', 'MyAnimation.js',
 'MyCircularAnimation.js', 'MyCameraAnimation.js', 'MyLinearAnimation.js','MyQuad.js', 'MyUnitCubeQuad.js', 'MyBoard.js', 'MyCell.js', 'MyCube.js',
  'MyTriangle.js', 'MyPiece.js', 'Queen.js', 'Drone.js', 'Pawn.js','../prolog/comunication.js', 'MyPieceAnimation.js', 'MyHistory.js', 'MyMove.js',
- 'CreateCylinder.js', 'MyCylinder.js', 'MyCylinderBase.js',
+ 'CreateCylinder.js', 'MyCylinder.js', 'MyCylinderBase.js','MyPosition.js',
 
 
 

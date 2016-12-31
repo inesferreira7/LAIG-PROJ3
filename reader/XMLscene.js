@@ -309,11 +309,10 @@ XMLscene.prototype.moveCamera = function() {
 		if (Math.abs(anime.travelledPositionDist[0]) < Math.abs(anime.positionDist[0]) ||
 			Math.abs(anime.travelledPositionDist[1]) < Math.abs(anime.positionDist[1]) ||
 			Math.abs(anime.travelledPositionDist[2]) < Math.abs(anime.positionDist[2]) ||
-
+			
 			Math.abs(anime.travelledDirectionDist[0]) < Math.abs(anime.directionDist[0]) ||
 			Math.abs(anime.travelledDirectionDist[1]) < Math.abs(anime.directionDist[1]) ||
 			Math.abs(anime.travelledDirectionDist[2]) < Math.abs(anime.directionDist[2]) ) {
-
 
 			var distPosX = anime.positionVelocity[0] * this.elapsedTime;
 			var distPosY = anime.positionVelocity[1] * this.elapsedTime;
@@ -446,7 +445,7 @@ XMLscene.prototype.readState = function(state){
 		this.checkDefault();
 
 		this.currentState = state;
-		if(state == 1){
+		if(this.currentState == 1){
 	//setTimeout(midCam1,1500, this);
 	//setTimeout(p1Cam,9500, this);
 	
@@ -458,7 +457,7 @@ XMLscene.prototype.readState = function(state){
 	
 		}
 		else{
-			if(state == 2){
+			if(this.currentState == 2){
 				
 	//setTimeout(midCam2,1500, this);
 	//setTimeout(p2Cam,9500, this);

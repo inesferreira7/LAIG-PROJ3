@@ -13,6 +13,8 @@ function MyBoard(scene){
   this.initPieces();
 
   this.isReplay = false;
+  this.positions = [];
+  this.posCounter = 0;
 
   this.history = null;
 
@@ -119,7 +121,9 @@ MyBoard.prototype.initBoardMatrix = function(){
    this.scene.scale(0.37,0.37,0.37);
    for(var x=0; x <5;x++){
      for(var y=0; y < 4; y++){
+		if(this.auxiliar[x][y] != null){
        this.auxiliar[x][y].display();
+		}
         }
    }
    this.scene.popMatrix();
@@ -148,9 +152,34 @@ MyBoard.prototype.make_move = function(xi,yi,xf,yf,playing,points){
         if(this.pieces[xf][yf] != ""){
         for(var x=0; x < 5; x++){
           for(var y=0; y < 4; y++){
+			  
+			 if (this.auxiliar[x][y] == null){
+				 
+			  this.pieces[xf][yf].animation = new MyPieceAnimation(this.pieces[xf][yf],1,1,-x,-y, 0.5);
+              this.pieces[xf][yf].moving = true;
+			  var newPos = new MyPosition(this.scene,x,y);
+			  console.log(newPos.x + ' is X ' + newPos.y + ' is Y ');
+			  this.positions.push(newPos);
+			  this.posCounter++;
+              this.auxiliar[x][y] = this.pieces[xf][yf];
+              this.auxiliar[x][y].selected = false;
+              console.log("Substituicao");
+              this.auxiliar[x][y].free = false;
+              console.log("Passou a falso");
+              console.log(this.auxiliar[x][y].type);
+              break break_loop;
+				 
+			 }
+			 else{
+			  
+			  
             if(this.auxiliar[x][y].free == true){
               this.pieces[xf][yf].animation = new MyPieceAnimation(this.pieces[xf][yf],1,1,-x,-y, 0.5);
               this.pieces[xf][yf].moving = true;
+			  var newPos = new MyPosition(this.scene,x,y);
+			  console.log(newPos.x + ' is X ' + newPos.y + ' is Y ');
+			  this.positions.push(newPos);
+			  this.posCounter++;
               this.auxiliar[x][y] = this.pieces[xf][yf];
               this.auxiliar[x][y].selected = false;
               console.log("Substituicao");
@@ -159,7 +188,7 @@ MyBoard.prototype.make_move = function(xi,yi,xf,yf,playing,points){
               console.log(this.auxiliar[x][y].type);
               break break_loop;
 
-            }
+			 }}
           }
         }
       }
@@ -206,6 +235,8 @@ MyBoard.prototype.showWinner = function(){
  }
 
  MyBoard.prototype.undo = function(){
+	 this.scene.changeCamera('Default');
+
 	if(this.history.type == 1){
 
 		if(this.history.moves.length < 1)
@@ -223,6 +254,13 @@ MyBoard.prototype.showWinner = function(){
 		if(lastMove.finalElement != ""){
 			lastMove.finalElement.x = lastMove.xf;
 			lastMove.finalElement.y = lastMove.yf;
+			if(this.posCounter > 0){
+				
+			var pos = this.positions[this.posCounter-1];
+			this.positions.pop();
+			this.posCounter--;
+			this.auxiliar[pos.x][pos.y] = null;
+			}
 		}
 
 		this.pieces[lastMove.xf][lastMove.yf] = lastMove.finalElement;
